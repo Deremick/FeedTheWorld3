@@ -1,6 +1,8 @@
 package com.alexanderwolf.feedtheworld;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +19,7 @@ import com.alexanderwolf.Settings;
 import com.alexanderwolf.Storage;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -66,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setAlarmManager();
+
+
         MoneyText = (TextView) findViewById(R.id.MoneyText);
 
         SharedPreferences firstPref = getSharedPreferences("FirstStart", Context.MODE_PRIVATE);
@@ -75,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         if (firstStart) {
 
             SharedPreferences.Editor moneyEdit = money.edit();
-            moneyEdit.putFloat("money", 100110);
+            moneyEdit.putFloat("money", 100110000);
             moneyEdit.commit();
 
 
@@ -293,7 +299,6 @@ public class MainActivity extends AppCompatActivity {
                                 MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
 
                                 SharedPreferences sumPref = getSharedPreferences("Producters", Context.MODE_PRIVATE);
-                                productSum = sumPref.getInt("sumProd", 0);
                                 productSum = sumPref.getInt("sumProd", 0);
                                 FriendProduct = sumPref.getInt("FriendProd", 0);
                                 RestProduct = sumPref.getInt("RestProd", 0);
@@ -513,6 +518,17 @@ public class MainActivity extends AppCompatActivity {
         ingredient.setClass(MainActivity.this, Ingredients.class);
         startActivity(ingredient);
     } */
+
+    private void setAlarmManager() {
+        Intent intent = new Intent(this, EnrichProduct.class);
+        PendingIntent sender = PendingIntent.getBroadcast(this, 2, intent, 0);
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        long l = new Date().getTime();
+        if (l < new Date().getTime()) {
+            l += 10000; // start at next hour
+        }
+        am.setRepeating(AlarmManager.RTC_WAKEUP, l, 10000, sender);
+    }
 }
 
 

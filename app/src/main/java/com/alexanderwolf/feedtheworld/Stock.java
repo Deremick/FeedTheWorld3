@@ -1,11 +1,16 @@
 package com.alexanderwolf.feedtheworld;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 
+import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,6 +27,18 @@ public class Stock extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                notificationIntent, 0);
+
+        Notification notification = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.icon)
+                .setContentTitle("My Awesome App")
+                .setContentText("Doing some work...")
+                .setContentIntent(pendingIntent).build();
+
+        startForeground(1337, notification);
     }
 
     @Override
@@ -69,4 +86,6 @@ public class Stock extends Service {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+
 }

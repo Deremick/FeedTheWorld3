@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,22 +18,27 @@ import java.text.DecimalFormat;
 import java.util.Random;
 
 public class Storage extends AppCompatActivity {
-   // float CurrentArfolyam = 2;
-    float n;
+
     float q;
     float money;
     int allProduct;
     int pressed;
     boolean isGoing;
 
-    SeekBar ProductSeekBar;
+    private static SeekBar ProductsSeekBar;
+    private static TextView ProductSelected;
+    int progressValue;
+    int allProd;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_storage);
-        final TextView prod = (TextView) findViewById(R.id.ProductSeekBar);
+
+        SellProduct();
+
+        final TextView prod = (TextView) findViewById(R.id.Products);
         final TextView arf = (TextView) findViewById(R.id.arfolyam);
         SharedPreferences Product = getSharedPreferences("Producters", Context.MODE_PRIVATE);
         int allProduct = Product.getInt("sumProd", 0);
@@ -48,6 +52,9 @@ public class Storage extends AppCompatActivity {
 
         arf.setText(new DecimalFormat("##.##").format(q) + " $$");
         prod.setText(new DecimalFormat("###,###,###").format(allProduct));
+
+
+
         Thread t = new Thread() {
 
             @Override
@@ -59,7 +66,7 @@ public class Storage extends AppCompatActivity {
                             @Override
                             public void run() {
 
-                                final TextView prod = (TextView) findViewById(R.id.ProductSeekBar);
+                                final TextView prod = (TextView) findViewById(R.id.Products);
                            //     final TextView arf = (TextView) findViewById(R.id.arfolyam);
                                 SharedPreferences Product = getSharedPreferences("Producters", Context.MODE_PRIVATE);
                                 int allproduct = Product.getInt("sumProd", 0);
@@ -68,13 +75,7 @@ public class Storage extends AppCompatActivity {
                                 money = Moneyka.getFloat("money", 0);
                                 final TextView Money = (TextView) findViewById(R.id.money);
                                 Money.setText(new DecimalFormat("###,###,###.##").format(money) + " $$");
-                             //   tozsde();
-                               // SharedPreferences Arfolyam = getSharedPreferences("Arfolyam", Context.MODE_PRIVATE);
-                                //q = Arfolyam.getFloat("arfolyam", 2);
-                                //arf.setText(Float.toString(q));
-
-                              //  SharedPreferences.Editor qEdit = Arfolyam.edit();
-                              //  qEdit.putFloat("arfolyam", )
+                                ProductsSeekBar.setMax(allproduct);
                             }
                         });
                     }
@@ -134,12 +135,15 @@ public class Storage extends AppCompatActivity {
         money = Moneyka.getFloat("money", 0);
 
         final TextView Money = (TextView) findViewById(R.id.money);
-        Money.setText(new DecimalFormat("###,###,###.##").format(money + q * allProduct) + " $$");
+        Money.setText(new DecimalFormat("###,###,###.##").format(money + q * ProductsSeekBar.getProgress()) + " $$");
         SharedPreferences.Editor Moneyedit = Moneyka.edit();
-        Moneyedit.putFloat("money", money + q * allProduct);
+        Moneyedit.putFloat("money", money + q * ProductsSeekBar.getProgress());
         Moneyedit.commit();
 
-        allProduct = 0;
+        allProduct -= ProductsSeekBar.getProgress();
+        ProductsSeekBar.setMax(allProduct);
+        ProductSelected.setText("Products Selected: " + new DecimalFormat("###,###,###").format(ProductsSeekBar.getMax()));
+        ProductsSeekBar.setProgress(ProductsSeekBar.getMax());
 
         SharedPreferences.Editor prodEdit = Product.edit();
         prodEdit.putInt("sumProd", allProduct);
@@ -202,35 +206,32 @@ public class Storage extends AppCompatActivity {
 
     }
 
-    public void SellProduct(View view) {
-        ProductSeekBar = (SeekBar) findViewById(R.id.ProductSeekBar);
-        IngredientsText = (EditText) findViewById(R.id.editText);
-        IngredientsTextView = (TextView) findViewById(R.id.IngredientsTextView);
-        SharedPreferences money = getSharedPreferences("Money", Context.MODE_PRIVATE);
-        Money = money.getFloat("money", 0);
-        ingredientsSeekBar.setMax((Math.round(Money) / 2) - 1);
-        IngredientsText.setHint("Max: " + new DecimalFormat("###,###,###").format(ingredientsSeekBar.getMax()));
+    public void SellProduct() {
+        ProductsSeekBar = (SeekBar) findViewById(R.id.ProductsSeekBar);
+        ProductSelected = (TextView) findViewById(R.id.ProductsSelected);
+        SharedPreferences Product = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        allProd = Product.getInt("sumProd", 0);
+        ProductsSeekBar.setMax(allProd);
+        ProductSelected.setText("Products Selected: " + new DecimalFormat("###,###,###").format(ProductsSeekBar.getMax()));
+        ProductsSeekBar.setProgress(ProductsSeekBar.getMax());
 
 
-        ingredientsSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        ProductsSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 progressValue = i;
-                IngredientsTextView.setText(new DecimalFormat("###,###,###").format(i));
+                ProductSelected.setText("Products Selected: " + new DecimalFormat("###,###,###").format(i));
 
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                IngredientsText.setVisibility(View.GONE);
+
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if (progressValue == 0) {
-                    IngredientsText.setVisibility(View.VISIBLE);
-                }
 
             }
         });
@@ -238,9 +239,9 @@ public class Storage extends AppCompatActivity {
 
 
     }
-    }
-
 }
+
+
 
 
 

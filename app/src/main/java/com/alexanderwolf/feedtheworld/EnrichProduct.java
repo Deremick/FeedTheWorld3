@@ -1,10 +1,13 @@
 package com.alexanderwolf.feedtheworld;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.widget.Button;
 
 import java.util.Timer;
@@ -18,6 +21,7 @@ public class EnrichProduct extends Service {
     int ALLproduct;
     int storage;
     int numberOfEnrich;
+    boolean isFull;
 
 
 
@@ -27,6 +31,18 @@ public class EnrichProduct extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                notificationIntent, 0);
+
+        Notification notification = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.icon)
+                .setContentTitle("My Awesome App")
+                .setContentText("Doing some work...")
+                .setContentIntent(pendingIntent).build();
+
+        startForeground(1337, notification);
     }
 
     @Override
@@ -91,6 +107,11 @@ public class EnrichProduct extends Service {
                     SharedPreferences.Editor EnrichTimerEditor = EnrichTimerPref.edit();
                     EnrichTimerEditor.putInt("EnrichTimer", EnrichTimer);
                     EnrichTimerEditor.commit();
+                   /* SharedPreferences isFullPref = getSharedPreferences("Storage", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor isFullEdit = isFullPref.edit();
+                    isFullEdit.putBoolean("isFull", true);
+                    isFullEdit.commit(); */
+
                 }
             }
 
@@ -101,6 +122,7 @@ public class EnrichProduct extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
     }
 
     @Override
