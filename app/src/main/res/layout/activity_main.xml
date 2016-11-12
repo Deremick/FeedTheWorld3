@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.alexanderwolf.feedtheworld.MainActivity">
+
+    <Button
+        android:text="BurgerMine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/start_BurgerMine"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/start_Factory"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textAllCaps="false"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
+        android:onClick="startMine"/>
+
+    <Button
+        android:text="Factory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/Start_Friends"
+        android:layout_alignEnd="@+id/Start_Friends"
+        android:id="@+id/start_Factory"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:textAllCaps="false"
+        android:onClick="startFactory"/>
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Timer_Factory"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/Timer_Restaurant"
+        android:layout_alignStart="@+id/Timer_Restaurant"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:layout_alignParentBottom="false" />
+
+    <Button
+        android:text="Restaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/start_Restaurant"
+        android:onClick="startRestaurant"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/Start_Friends"
+        android:layout_alignLeft="@+id/Start_Friends"
+        android:layout_alignStart="@+id/Start_Friends"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/start_Restaurant"
+        android:layout_alignRight="@+id/Timer_Friends"
+        android:layout_alignEnd="@+id/Timer_Friends"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/Timer_Restaurant"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Timer_Restaurant"
+        android:layout_alignLeft="@+id/NumberOfFriends"
+        android:layout_alignStart="@+id/NumberOfFriends"
+        android:id="@+id/NumberOfRest"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="Friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Start_Friends"
+        android:onClick="startFriends"
+        android:textStyle="normal|bold"
+        android:textAllCaps="false"
+        android:layout_alignBaseline="@+id/Timer_Friends"
+        android:layout_alignBottom="@+id/Timer_Friends"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/NumberOfFriends"
+        android:layout_alignBaseline="@+id/Timer_Friends"
+        android:layout_alignBottom="@+id/Timer_Friends"
+        android:layout_toRightOf="@+id/Timer_Friends"
+        android:layout_toEndOf="@+id/Timer_Friends"
+        android:layout_marginLeft="65dp"
+        android:layout_marginStart="65dp"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="98dp"
+        android:id="@+id/Timer_Friends"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/start_Restaurant"
+        android:layout_toEndOf="@+id/start_Restaurant"
+        android:layout_marginLeft="47dp"
+        android:layout_marginStart="47dp"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/NumberOfFact"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/NumberOfRest"
+        android:layout_alignStart="@+id/NumberOfRest"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Timer_Mine"
+        android:layout_alignBaseline="@+id/start_BurgerMine"
+        android:layout_alignBottom="@+id/start_BurgerMine"
+        android:layout_alignLeft="@+id/Timer_Factory"
+        android:layout_alignStart="@+id/Timer_Factory"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Timer_Enrich"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:layout_alignBaseline="@+id/NumberOfEnrich"
+        android:layout_alignBottom="@+id/NumberOfEnrich"
+        android:layout_alignLeft="@+id/Timer_Mine"
+        android:layout_alignStart="@+id/Timer_Mine" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/NumberOfEnrich"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:layout_marginTop="14dp"
+        android:layout_alignTop="@+id/start_BurgerEnrichment"
+        android:layout_alignLeft="@+id/NumberOfMine"
+        android:layout_alignStart="@+id/NumberOfMine" />
+
+    <Button
+        android:text="Burger\nEnrichmenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/start_BurgerEnrichment"
+        android:textAllCaps="false"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
+        android:onClick="startEnrich"
+        android:elevation="0dp"
+        android:layout_above="@+id/Shop"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="11dp" />
+
+    <Button
+        android:text="Shop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Shop"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:onClick="Shop"
+        android:layout_marginBottom="17dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/NumberOfMine"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:layout_alignBaseline="@+id/Timer_Mine"
+        android:layout_alignBottom="@+id/Timer_Mine"
+        android:layout_toRightOf="@+id/NumberOfFact"
+        android:layout_toEndOf="@+id/NumberOfFact" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="9dp"
+        android:layout_marginEnd="9dp"
+        android:id="@+id/button"
+        android:onClick="onStart" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/button2" />
+
+    <Button
+        android:text="Settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/Settings_button" />
+
+    <Button
+        android:text="storage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NumberOfRest"
+        android:layout_alignLeft="@+id/Settings_button"
+        android:layout_alignStart="@+id/Settings_button"
+        android:id="@+id/storage"
+        android:onClick="StorageAct" />
+
+    <TextView
+        android:text="0/0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SUM"
+        android:textStyle="normal|bold"
+        android:textSize="24sp"
+        android:layout_alignBottom="@+id/Settings_button"
+        android:layout_alignRight="@+id/Shop"
+        android:layout_alignEnd="@+id/Shop"
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/NumberOfMine"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button"
+        android:id="@+id/IngredientsText" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/NumberOfEnrich"
+        android:layout_alignLeft="@+id/storage"
+        android:layout_alignStart="@+id/storage"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:id="@+id/MoneyText" />
+
+</RelativeLayout>

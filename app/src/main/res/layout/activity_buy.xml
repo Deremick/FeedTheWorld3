@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_buy"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.alexanderwolf.Buy">
+
+    <Button
+        android:text="buy friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buy_friends"
+        android:onClick="buyFriend"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/buy_factory"
+        android:layout_alignStart="@+id/buy_factory"
+        android:layout_marginTop="11dp" />
+
+    <Button
+        android:text="buy restaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buy_rest"
+        android:onClick="buyRestaurant"
+        android:layout_below="@+id/buy_friends"
+        android:layout_alignRight="@+id/buy_storage"
+        android:layout_alignEnd="@+id/buy_storage"
+        android:layout_marginTop="24dp" />
+
+    <Button
+        android:text="Buy factory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buy_factory"
+        android:onClick="buyFactory"
+        android:layout_alignTop="@+id/buy_rest"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp" />
+
+    <Button
+        android:text="buy mine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buy_mine"
+        android:onClick="buyMine"
+        android:layout_below="@+id/buy_factory"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:max="1000"
+        android:progress="0" />
+
+    <TextView
+        android:text="100,000 $$"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/buy_storage"
+        android:layout_toLeftOf="@+id/buy_rest"
+        android:layout_toStartOf="@+id/buy_rest"
+        android:layout_marginTop="14dp"
+        android:id="@+id/textView" />
+
+    <TextView
+        android:text="50,000 $$"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/buy_factory"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginTop="14dp"
+        android:id="@+id/textView4" />
+
+    <TextView
+        android:text="5,000 $$"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/buy_rest"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_marginBottom="11dp"
+        android:id="@+id/textView5" />
+
+    <TextView
+        android:text="100 $$"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:layout_alignBaseline="@+id/buy_friends"
+        android:layout_alignBottom="@+id/buy_friends"
+        android:layout_alignRight="@+id/textView5"
+        android:layout_alignEnd="@+id/textView5" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_alignEnd="@+id/textView3"
+        android:singleLine="true"
+        android:clickable="false"
+        android:selectAllOnFocus="true" />
+
+    <Button
+        android:text="buy storage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buy_storage"
+        android:onClick="buyStorage"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignRight="@+id/buy_factory"
+        android:layout_alignEnd="@+id/buy_factory" />
+
+    <TextView
+        android:text="1,500,000 $$"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_alignBaseline="@+id/buy_mine"
+        android:layout_alignBottom="@+id/buy_mine"
+        android:layout_toLeftOf="@+id/buy_rest"
+        android:layout_toStartOf="@+id/buy_rest" />
+
+    <Button
+        android:text="Buy Enrich"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Shop"
+        android:onClick="buyEnrich"
+        android:layout_below="@+id/buy_mine"
+        android:layout_alignRight="@+id/buy_friends"
+        android:layout_alignEnd="@+id/buy_friends"
+        android:layout_marginTop="25dp" />
+
+    <TextView
+        android:text="10,000,000 $$"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_alignBaseline="@+id/Shop"
+        android:layout_alignBottom="@+id/Shop"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_alignEnd="@+id/textView3" />
+
+    <Button
+        android:text="buy ingredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button3"
+        android:onClick="BuyIngredients"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/buy_mine"
+        android:layout_alignStart="@+id/buy_mine"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView6"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="23dp"
+        android:layout_marginEnd="23dp"
+        android:id="@+id/MoneyText" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/IngredientsTextView"
+        android:layout_above="@+id/seekBar"
+        android:layout_alignLeft="@+id/MoneyText"
+        android:layout_alignStart="@+id/MoneyText"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="22dp" />
+
+</RelativeLayout>
