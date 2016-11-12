@@ -81,6 +81,12 @@ public class FactProduct extends Service {
 
 
                 }
+                else {
+                    FactTimer = 5;
+                    SharedPreferences.Editor FactTimerEditor = FactTimerPref.edit();
+                    FactTimerEditor.putInt("FactTimer", FactTimer);
+                    FactTimerEditor.commit();
+                }
             }
         }, 1000, 1000);
         return START_STICKY;

@@ -48,7 +48,7 @@ public class Buy extends AppCompatActivity {
         SharedPreferences money = getSharedPreferences("Money", Context.MODE_PRIVATE);
         Money = money.getFloat("money", 0);
         MoneyText = (TextView) findViewById(R.id.MoneyText);
-        MoneyText.setText("Money: " + new DecimalFormat("##.##").format(Money) + " $$");
+        MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
 
         SharedPreferences numberOfFriends = getSharedPreferences("Producters", Context.MODE_PRIVATE);
         numberOfFriend = numberOfFriends.getInt("NOFriends", 0);
@@ -86,8 +86,8 @@ public class Buy extends AppCompatActivity {
             friendEditor.commit();
             Money = money.getFloat("money", 0);
             ingredientsSeekBar.setMax((Math.round(Money) / 2) - 1);
-            IngredientsText.setHint("Max: " + ingredientsSeekBar.getMax());
-            MoneyText.setText("Money: " + new DecimalFormat("##.##").format(Money) + " $$");
+            IngredientsText.setHint("Max: " + new DecimalFormat("###,###,###").format(ingredientsSeekBar.getMax()));
+            MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
         }
         else {
             Toast.makeText(this, "You don't have enough money :(", Toast.LENGTH_SHORT).show();
@@ -110,8 +110,8 @@ public class Buy extends AppCompatActivity {
             RestEditor.commit();
             Money = money.getFloat("money", 0);
             ingredientsSeekBar.setMax((Math.round(Money) / 2) - 1);
-            IngredientsText.setHint("Max: " + ingredientsSeekBar.getMax());
-            MoneyText.setText("Money: " + new DecimalFormat("##.##").format(Money) + " $$");
+            IngredientsText.setHint("Max: " + new DecimalFormat("###,###,###").format(ingredientsSeekBar.getMax()));
+            MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
         }
         else {
             Toast.makeText(this, "You don't have enough money :(", Toast.LENGTH_SHORT).show();
@@ -133,8 +133,8 @@ public class Buy extends AppCompatActivity {
             FactEditor.commit();
             Money = money.getFloat("money", 0);
             ingredientsSeekBar.setMax((Math.round(Money) / 2) - 1);
-            IngredientsText.setHint("Max: " + ingredientsSeekBar.getMax());
-            MoneyText.setText("Money: " + new DecimalFormat("##.##").format(Money) + " $$");
+            IngredientsText.setHint("Max: " + new DecimalFormat("###,###,###").format(ingredientsSeekBar.getMax()));
+            MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
         }
         else {
             Toast.makeText(this, "You don't have enough money :(", Toast.LENGTH_SHORT).show();
@@ -155,8 +155,8 @@ public class Buy extends AppCompatActivity {
             MineEditor.commit();
             Money = money.getFloat("money", 0);
             ingredientsSeekBar.setMax((Math.round(Money) / 2) - 1);
-            IngredientsText.setHint("Max: " + ingredientsSeekBar.getMax());
-            MoneyText.setText("Money: " + new DecimalFormat("##.##").format(Money) + " $$");
+            IngredientsText.setHint("Max: " + new DecimalFormat("###,###,###").format(ingredientsSeekBar.getMax()));
+            MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
         }
         else {
             Toast.makeText(this, "You don't have enough money :(", Toast.LENGTH_SHORT).show();
@@ -178,8 +178,8 @@ public class Buy extends AppCompatActivity {
             EnrichEditor.commit();
             Money = money.getFloat("money", 0);
             ingredientsSeekBar.setMax((Math.round(Money) / 2) - 1);
-            IngredientsText.setHint("Max: " + ingredientsSeekBar.getMax());
-            MoneyText.setText("Money: " + new DecimalFormat("##.##").format(Money) + " $$");
+            IngredientsText.setHint("Max: " + new DecimalFormat("###,###,###").format(ingredientsSeekBar.getMax()));
+            MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
         }
         else {
             Toast.makeText(this, "You don't have enough money :(", Toast.LENGTH_SHORT).show();
@@ -205,8 +205,8 @@ public class Buy extends AppCompatActivity {
             storageEditor.commit();
             Money = money.getFloat("money", 0);
             ingredientsSeekBar.setMax((Math.round(Money) / 2) - 1);
-            IngredientsText.setHint("Max: " + ingredientsSeekBar.getMax());
-            MoneyText.setText("Money: " + new DecimalFormat("##.##").format(Money) + " $$");
+            IngredientsText.setHint("Max: " + new DecimalFormat("###,###,###").format(ingredientsSeekBar.getMax()));
+            MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
         }
         else {
             Toast.makeText(this, "You don't have enough money :(", Toast.LENGTH_SHORT).show();
@@ -221,7 +221,7 @@ public class Buy extends AppCompatActivity {
         SharedPreferences money = getSharedPreferences("Money", Context.MODE_PRIVATE);
         Money = money.getFloat("money", 0);
         ingredientsSeekBar.setMax((Math.round(Money) / 2) - 1);
-        IngredientsText.setHint("Max: " + ingredientsSeekBar.getMax());
+        IngredientsText.setHint("Max: " + new DecimalFormat("###,###,###").format(ingredientsSeekBar.getMax()));
 
 
         ingredientsSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -264,8 +264,8 @@ public class Buy extends AppCompatActivity {
             moneyEdit.putFloat("money", Money -= progressValue * 2);
             moneyEdit.commit();
             ingredientsSeekBar.setMax((Math.round(Money) / 2) - 1);
-            IngredientsText.setHint("Max: " + ingredientsSeekBar.getMax());
-            MoneyText.setText("Money: " + new DecimalFormat("##.##").format(Money) + " $$");
+            IngredientsText.setHint("Max: " + new DecimalFormat("###,###,###").format(ingredientsSeekBar.getMax()));
+            MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
         }
         else {
             progressValue = Integer.parseInt(IngredientsText.getText().toString());
@@ -278,8 +278,8 @@ public class Buy extends AppCompatActivity {
                  moneyEdit.putFloat("money", Money -= progressValue * 2);
                  moneyEdit.commit();
                  ingredientsSeekBar.setMax((Math.round(Money) / 2) - 1);
-                 IngredientsText.setHint("Max: " + ingredientsSeekBar.getMax());
-                 MoneyText.setText("Money: " + new DecimalFormat("##.##").format(Money) + " $$");
+                 IngredientsText.setHint("Max: " + new DecimalFormat("###,###,###").format(ingredientsSeekBar.getMax()));
+                 MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
              }
             else {
                  Toast.makeText(Buy.this, "Not enough money :(", Toast.LENGTH_SHORT).show();

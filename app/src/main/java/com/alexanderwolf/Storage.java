@@ -43,10 +43,10 @@ public class Storage extends AppCompatActivity {
         final TextView Money = (TextView) findViewById(R.id.money);
         SharedPreferences Moneyka = getSharedPreferences("Money", Context.MODE_PRIVATE);
         money = Moneyka.getFloat("money", 0);
-        Money.setText(new DecimalFormat("##.##").format(money) + " $$");
+        Money.setText(new DecimalFormat("###,###,###.##").format(money) + " $$");
 
         arf.setText(new DecimalFormat("##.##").format(q) + " $$");
-        prod.setText(Integer.toString(allProduct));
+        prod.setText(new DecimalFormat("###,###,###").format(allProduct));
         Thread t = new Thread() {
 
             @Override
@@ -62,7 +62,7 @@ public class Storage extends AppCompatActivity {
                            //     final TextView arf = (TextView) findViewById(R.id.arfolyam);
                                 SharedPreferences Product = getSharedPreferences("Producters", Context.MODE_PRIVATE);
                                 int allproduct = Product.getInt("sumProd", 0);
-                                prod.setText(Integer.toString(allproduct));
+                                prod.setText(new DecimalFormat("###,###,###").format(allproduct));
                              //   tozsde();
                                // SharedPreferences Arfolyam = getSharedPreferences("Arfolyam", Context.MODE_PRIVATE);
                                 //q = Arfolyam.getFloat("arfolyam", 2);
@@ -129,7 +129,7 @@ public class Storage extends AppCompatActivity {
         money = Moneyka.getFloat("money", 0);
 
         final TextView Money = (TextView) findViewById(R.id.money);
-        Money.setText(new DecimalFormat("##.##").format(money + q * allProduct) + " $$");
+        Money.setText(new DecimalFormat("###,###,###.##").format(money + q * allProduct) + " $$");
         SharedPreferences.Editor Moneyedit = Moneyka.edit();
         Moneyedit.putFloat("money", money + q * allProduct);
         Moneyedit.commit();

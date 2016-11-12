@@ -86,6 +86,12 @@ public class EnrichProduct extends Service {
 
                     }
                 }
+                else {
+                    EnrichTimer = 3;
+                    SharedPreferences.Editor EnrichTimerEditor = EnrichTimerPref.edit();
+                    EnrichTimerEditor.putInt("EnrichTimer", EnrichTimer);
+                    EnrichTimerEditor.commit();
+                }
             }
 
         }, 1000, 1000);

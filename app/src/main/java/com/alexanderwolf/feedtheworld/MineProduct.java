@@ -81,6 +81,12 @@ public class MineProduct extends Service {
                     }
 
                 }
+                else {
+                    MineTimer = 5;
+                    SharedPreferences.Editor MineTimerEditor = MineTimerPref.edit();
+                    MineTimerEditor.putInt("MineTimer", MineTimer);
+                    MineTimerEditor.commit();
+                }
             }
         }, 1000, 1000);
 

@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             firstEdit.commit();
         }
         Money = money.getFloat("money", 0);
-        MoneyText.setText("Money: " + new DecimalFormat("##.##").format(Money) + " $$");
+        MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
 
 
         SharedPreferences pressedPref = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 SharedPreferences money = getSharedPreferences("Money", Context.MODE_PRIVATE);
                                 Money = money.getFloat("money", 0);
-                                MoneyText.setText("Money: " + new DecimalFormat("##.##").format(Money) + " $$");
+                                MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
 
                                 SharedPreferences sumPref = getSharedPreferences("Producters", Context.MODE_PRIVATE);
                                 productSum = sumPref.getInt("sumProd", 0);
@@ -305,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
                                 storage = storagePref.getInt("storage", 0);
 
 
-                                SUM.setText(Integer.toString(storage) + " / " + Integer.toString(productSum + EnrichProduct + MineProduct + FactProduct + RestProduct + FriendProduct));
+                                SUM.setText(new DecimalFormat("###,###,###").format(storage) + " / " + new DecimalFormat("###,###,###").format(productSum + EnrichProduct + MineProduct + FactProduct + RestProduct + FriendProduct));
 
                                // if (productSum + EnrichProduct + MineProduct + FactProduct + RestProduct + FriendProduct <= storage) {
 
@@ -330,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
                                 int ingredients = ingredient.getInt("ingredients", 0);
 
 
-                                IngredientsText.setText(Integer.toString(ingredients));
+                                IngredientsText.setText(new DecimalFormat("###,###,###").format(ingredients));
                                 }
                         });
                     }
@@ -514,3 +514,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(ingredient);
     } */
 }
+
+
+
+//pah

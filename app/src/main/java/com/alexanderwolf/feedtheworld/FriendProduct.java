@@ -84,6 +84,12 @@ public class FriendProduct extends Service {
                     }
 
                 }
+                else {
+                    FriendTimer = 15;
+                    SharedPreferences.Editor FriendTimerEditor = friendTimer.edit();
+                    FriendTimerEditor.putInt("FriendTimer", FriendTimer);
+                    FriendTimerEditor.commit();
+                }
             }
 
         }, 1000, 1000);

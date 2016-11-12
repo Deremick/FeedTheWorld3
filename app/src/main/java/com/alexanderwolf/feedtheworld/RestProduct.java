@@ -83,6 +83,12 @@ public class RestProduct extends Service {
 
 
                 }
+                else {
+                    RestTimer = 10;
+                    SharedPreferences.Editor RestTimerEditor = RestTimerPref.edit();
+                    RestTimerEditor.putInt("RestTimer", RestTimer);
+                    RestTimerEditor.commit();
+                }
             }
         }, 1000, 1000);
         return START_STICKY;
