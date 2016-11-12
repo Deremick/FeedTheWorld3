@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     while (!isInterrupted()) {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -517,4 +517,3 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//pah

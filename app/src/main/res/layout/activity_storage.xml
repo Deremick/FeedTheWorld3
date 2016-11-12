@@ -17,15 +17,15 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:id="@+id/Products" />
+        android:id="@+id/ProductSeekBar" />
 
     <TextView
         android:text="0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Products"
-        android:layout_alignRight="@+id/Products"
-        android:layout_alignEnd="@+id/Products"
+        android:layout_below="@+id/ProductSeekBar"
+        android:layout_alignRight="@+id/ProductSeekBar"
+        android:layout_alignEnd="@+id/ProductSeekBar"
         android:layout_marginTop="91dp"
         android:id="@+id/arfolyam" />
 
@@ -47,4 +47,25 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="74dp"
         android:id="@+id/money" />
+
+    <Button
+        android:text="new stock value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ProductSeekBar"
+        android:layout_toLeftOf="@+id/sell_product"
+        android:layout_toStartOf="@+id/sell_product"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="78dp"
+        android:id="@+id/button4"
+        android:onClick="newStock" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:id="@+id/ProductSeekBar" />
 </RelativeLayout>
