@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Button;
 
@@ -163,7 +164,9 @@ public class RestProduct extends Service {
                             .setSmallIcon(R.drawable.icon)
                             .setContentTitle("Feed the World")
                             .setContentText("Storage is Full!")
-                            .setAutoCancel(true);
+                            .setAutoCancel(true)
+                            .setVibrate(new long[] {1000, 1000})
+                            .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
             Intent resultIntent = new Intent(RestProduct.this, MainActivity.class);
 
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(RestProduct.this);
@@ -191,7 +194,9 @@ public class RestProduct extends Service {
                             .setSmallIcon(R.drawable.icon)
                             .setContentTitle("Feed the World")
                             .setContentText("Ingredients are gone!")
-                            .setAutoCancel(true);
+                            .setAutoCancel(true)
+                            .setVibrate(new long[] {1000, 1000})
+                            .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
             Intent resultIntent = new Intent(RestProduct.this, MainActivity.class);
 
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(RestProduct.this);
