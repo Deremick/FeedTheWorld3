@@ -185,11 +185,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/IngredientsTextView"
-        android:layout_marginLeft="9dp"
-        android:layout_marginStart="9dp"
-        android:layout_alignBaseline="@+id/button3"
-        android:layout_alignBottom="@+id/button3"
-        android:layout_alignLeft="@+id/MoneyText"
-        android:layout_alignStart="@+id/MoneyText" />
+        android:layout_below="@+id/buy_storage"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginTop="22dp" />
 
 </RelativeLayout>

@@ -67,6 +67,8 @@ public class FactProduct extends Service {
                         FactTimerEditor.putInt("FactTimer", FactTimer);
                         FactTimerEditor.commit();
                     }
+                    ingredient = Ingredient.getInt("ingredients", 0);
+                    FactTimer = FactTimerPref.getInt("FactTimer", 5);
                     if (FactTimer == 0 && ingredient > 1) {
                         FactTimer = 5;
                         SharedPreferences.Editor FactTimerEditor = FactTimerPref.edit();
@@ -102,7 +104,21 @@ public class FactProduct extends Service {
                         }
 
                     }
+                    else if (ingredient == 0 || FactTimer == -1) {
+                        FactTimer = 5;
+                        SharedPreferences.Editor FactTimerEditor = FactTimerPref.edit();
+                        FactTimerEditor.putInt("FactTimer", FactTimer);
+                        FactTimerEditor.commit();
 
+                        SharedPreferences.Editor startedEdit = started.edit();
+                        startedEdit.putBoolean("FactStarted", false);
+                        startedEdit.commit();
+
+                        stopForeground(true);
+                        stopSelf();
+                        fact.cancel();
+                        fact.purge();
+                    }
 
                 }
                 else if ((factStarted) && !(storage - ALLproduct >= numberOfFact * 40)){
@@ -123,6 +139,7 @@ public class FactProduct extends Service {
                     fact.cancel();
                     fact.purge();
                 }
+
             }
         }, 1000, 1000);
 

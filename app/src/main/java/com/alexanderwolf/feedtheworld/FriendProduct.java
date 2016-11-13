@@ -68,7 +68,8 @@ public class FriendProduct extends Service {
                                 FriendTimerEditor.commit();
 
                             }
-                            FriendTimer = friendTimer.getInt("FriendTimer", 0);
+                            ingredient = Ingredient.getInt("ingredients", 0);
+                            FriendTimer = friendTimer.getInt("FriendTimer", 15);
                             if (FriendTimer == 0 && ingredient > 1) {
                                 FriendTimer = 15;
                                 SharedPreferences.Editor FriendTimerEditor = friendTimer.edit();
@@ -103,6 +104,22 @@ public class FriendProduct extends Service {
                                 }
 
                             }
+                            else if (ingredient == 0 || FriendTimer == -1){
+                                FriendTimer = 15;
+                                SharedPreferences.Editor FriendTimerEditor = friendTimer.edit();
+                                FriendTimerEditor.putInt("FriendTimer", FriendTimer);
+                                FriendTimerEditor.commit();
+
+                                SharedPreferences.Editor startedEdit = started.edit();
+                                startedEdit.putBoolean("FriendsStarted", false);
+                                startedEdit.commit();
+
+                                stopForeground(true);
+                                stopSelf();
+                                friend.cancel();
+                                friend.purge();
+                            }
+
 
                         } else if (FriendsStarted && !(storage - ALLproduct >= numberOfFriends)){
                             FriendTimer = 15;
@@ -122,6 +139,7 @@ public class FriendProduct extends Service {
                             friend.cancel();
                             friend.purge();
                         }
+
                 }
 
             }, 1000, 1000);

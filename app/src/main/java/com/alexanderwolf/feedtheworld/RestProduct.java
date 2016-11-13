@@ -66,6 +66,8 @@ public class RestProduct extends Service {
                         RestTimerEditor.putInt("RestTimer", RestTimer);
                         RestTimerEditor.commit();
                     }
+                    ingredient = Ingredient.getInt("ingredients", 0);
+                    RestTimer = RestTimerPref.getInt("RestTimer", 10);
                     if (RestTimer == 0 && ingredient > 1) {
                         RestTimer = 10;
                         SharedPreferences.Editor RestTimerEditor = RestTimerPref.edit();
@@ -101,7 +103,21 @@ public class RestProduct extends Service {
                         }
 
                     }
+                    else if (ingredient == 0 || RestTimer == -1){
+                        RestTimer = 10;
+                        SharedPreferences.Editor RestTimerEditor = RestTimerPref.edit();
+                        RestTimerEditor.putInt("RestTimer", RestTimer);
+                        RestTimerEditor.commit();
 
+                        SharedPreferences.Editor startedEdit = started.edit();
+                        startedEdit.putBoolean("RestStarted", false);
+                        startedEdit.commit();
+
+                        stopForeground(true);
+                        stopSelf();
+                        rest.cancel();
+                        rest.purge();
+                    }
 
                 }
                 else if ((restStarted) && !(storage - ALLproduct >=  numberOfRests * 10)){
@@ -122,6 +138,7 @@ public class RestProduct extends Service {
                     rest.cancel();
                     rest.purge();
                 }
+
             }
         }, 1000, 1000);
 

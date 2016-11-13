@@ -75,6 +75,8 @@ public class EnrichProduct extends Service {
                         EnrichTimerEditor.putInt("EnrichTimer", EnrichTimer);
                         EnrichTimerEditor.commit();
                     }
+                    ingredient = Ingredient.getInt("ingredients", 0);
+                    EnrichTimer = EnrichTimerPref.getInt("EnrichTimer", 3);
                     if ((EnrichTimer == 0) && (ingredient > 1)) {
                         EnrichTimer = 3;
                         SharedPreferences.Editor EnrichTimerEditor = EnrichTimerPref.edit();
@@ -111,6 +113,22 @@ public class EnrichProduct extends Service {
                         }
 
                     }
+
+                    else if (ingredient == 0 || EnrichTimer == -1) {
+                        EnrichTimer = 3;
+                        SharedPreferences.Editor EnrichTimerEditor = EnrichTimerPref.edit();
+                        EnrichTimerEditor.putInt("EnrichTimer", EnrichTimer);
+                        EnrichTimerEditor.commit();
+
+                        SharedPreferences.Editor startedEdit = started.edit();
+                        startedEdit.putBoolean("EnrichStarted", false);
+                        startedEdit.commit();
+
+                        stopForeground(true);
+                        stopSelf();
+                        enrichTimer.cancel();
+                        enrichTimer.purge();
+                    }
                 }
                 else if ((enrichStarted) && !(storage - ALLproduct >= numberOfEnrich * 500)){
                     EnrichTimer = 3;
@@ -132,6 +150,7 @@ public class EnrichProduct extends Service {
 
 
                 }
+
             }
 
         }, 1000, 1000);

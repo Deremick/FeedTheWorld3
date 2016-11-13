@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         if (firstStart) {
 
             SharedPreferences.Editor moneyEdit = money.edit();
-            moneyEdit.putFloat("money", 100110000);
+            moneyEdit.putFloat("money", 100110);
             moneyEdit.commit();
 
 

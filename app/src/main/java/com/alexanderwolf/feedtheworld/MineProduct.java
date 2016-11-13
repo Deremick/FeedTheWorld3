@@ -72,6 +72,8 @@ public class MineProduct extends Service {
                         MineTimerEditor.putInt("MineTimer", MineTimer);
                         MineTimerEditor.commit();
                     }
+                    ingredient = Ingredient.getInt("ingredients", 0);
+                    MineTimer = MineTimerPref.getInt("MineTimer", 5);
                     if (MineTimer == 0 && ingredient > 1) {
                         MineTimer = 5;
                         SharedPreferences.Editor MineTimerEditor = MineTimerPref.edit();
@@ -106,7 +108,21 @@ public class MineProduct extends Service {
                         }
 
                     }
+                    else if (ingredient == 0 || MineTimer == -1) {
+                        MineTimer = 5;
+                        SharedPreferences.Editor MineTimerEditor = MineTimerPref.edit();
+                        MineTimerEditor.putInt("MineTimer", MineTimer);
+                        MineTimerEditor.commit();
 
+                        SharedPreferences.Editor startedEdit = started.edit();
+                        startedEdit.putBoolean("MineStarted", false);
+                        startedEdit.commit();
+
+                        stopForeground(true);
+                        stopSelf();
+                        mine.cancel();
+                        mine.purge();
+                    }
                 }
                 else if ((mineStarted) && !(storage - ALLproduct >= numberOfMine * 100)){
                     MineTimer = 5;
@@ -127,6 +143,7 @@ public class MineProduct extends Service {
                     mine.cancel();
                     mine.purge();
                 }
+
 
             }
         }, 1000, 1000);

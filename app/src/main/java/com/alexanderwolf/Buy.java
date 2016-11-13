@@ -271,6 +271,7 @@ public class Buy extends AppCompatActivity {
             progressValue = Integer.parseInt(IngredientsText.getText().toString());
              if (Math.round(Money) >= (progressValue * 2)) {
                  SharedPreferences.Editor ingredientEditor = ingredient.edit();
+                 ingredients = ingredient.getInt("ingredients", 0);
                  ingredientEditor.putInt("ingredients", ingredients += progressValue);
                  ingredientEditor.commit();
                  Money = money.getFloat("money", 0);
