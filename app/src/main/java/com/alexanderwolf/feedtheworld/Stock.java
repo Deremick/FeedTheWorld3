@@ -27,25 +27,14 @@ public class Stock extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Intent notificationIntent = new Intent(this, MainActivity.class);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
-                notificationIntent, 0);
-
-        Notification notification = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.icon)
-                .setContentTitle("Feed the World")
-                .setContentText("New Stock Value!")
-                .setContentIntent(pendingIntent).build();
-
-        startForeground(3, notification);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //return super.onStartCommand(intent, flags, startId);
 
-        Timer a = new Timer();
+        final Timer a = new Timer();
         a.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -57,16 +46,22 @@ public class Stock extends Service {
                 if (CurrentArfolyam + n > 10) {
                     ArfolyamEdit.putFloat("arfolyam", CurrentArfolyam + n);
                     ArfolyamEdit.commit();
+                    a.cancel();
+                    a.purge();
                 }
                 else {
                     CurrentArfolyam = 10.2f;
                     ArfolyamEdit.putFloat("arfolyam", CurrentArfolyam);
                     ArfolyamEdit.commit();
+                    a.cancel();
+                    a.purge();
                 }
                 if (CurrentArfolyam + n > 45) {
                     CurrentArfolyam = 44.7f;
                     ArfolyamEdit.putFloat("arfolyam", CurrentArfolyam);
                     ArfolyamEdit.commit();
+                    a.cancel();
+                    a.purge();
                 }
                 stopSelf();
             }
@@ -79,7 +74,7 @@ public class Stock extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        stopForeground(true);
+        stopSelf();
     }
 
     @Override

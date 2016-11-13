@@ -43,7 +43,7 @@ public class FactProduct extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        Timer fact = new Timer();
+        final Timer fact = new Timer();
         fact.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -91,11 +91,13 @@ public class FactProduct extends Service {
                             SharedPreferences.Editor Edit = sumPref.edit();
                             Edit.putInt("FactProd", FactProduct);
                             Edit.commit();
-
                             SharedPreferences.Editor startedEdit = started.edit();
                             startedEdit.putBoolean("FactStarted", false);
                             startedEdit.commit();
+                            stopForeground(true);
                             stopSelf();
+                            fact.cancel();
+                            fact.purge();
 
                         }
 
@@ -103,7 +105,7 @@ public class FactProduct extends Service {
 
 
                 }
-                else if (factStarted){
+                else if ((factStarted) && !(storage - ALLproduct >= numberOfFact * 40)){
                     FactTimer = 5;
                     SharedPreferences.Editor FactTimerEditor = FactTimerPref.edit();
                     FactTimerEditor.putInt("FactTimer", FactTimer);
@@ -116,7 +118,10 @@ public class FactProduct extends Service {
                     SharedPreferences.Editor startedEdit = started.edit();
                     startedEdit.putBoolean("FactStarted", false);
                     startedEdit.commit();
+                    stopForeground(true);
                     stopSelf();
+                    fact.cancel();
+                    fact.purge();
                 }
             }
         }, 1000, 1000);
@@ -128,32 +133,32 @@ public class FactProduct extends Service {
     public void onDestroy() {
         super.onDestroy();
         SharedPreferences isFullPref = getSharedPreferences("Storage", Context.MODE_PRIVATE);
+        SharedPreferences Ingredient = getSharedPreferences("Ingredients", Context.MODE_PRIVATE);
         boolean IsFriendFull = isFullPref.getBoolean("FriendIsFull", false);
         boolean IsFactFull = isFullPref.getBoolean("FactIsFull", false);
         boolean IsRestFull = isFullPref.getBoolean("RestIsFull", false);
         boolean IsMineFull = isFullPref.getBoolean("MineIsFull", false);
         boolean IsEnrichFull = isFullPref.getBoolean("EnrichIsFull", false);
         boolean notiShown = isFullPref.getBoolean("notiShown", false);
-        if (IsFriendFull && IsFactFull && IsRestFull && IsMineFull && IsEnrichFull && !notiShown) {
+        ingredient = Ingredient.getInt("ingredients", 0);
+        if ((IsFriendFull || IsFactFull || IsRestFull || IsMineFull || IsEnrichFull) && !notiShown) {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(FactProduct.this)
                             .setSmallIcon(R.drawable.icon)
                             .setContentTitle("Feed the World")
-                            .setContentText("Storage is Full!");
+                            .setContentText("Storage is Full!")
+                            .setAutoCancel(true);
             Intent resultIntent = new Intent(FactProduct.this, MainActivity.class);
 
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(FactProduct.this);
             stackBuilder.addParentStack(MainActivity.class);
             stackBuilder.addNextIntent(resultIntent);
-            PendingIntent resultPendingIntent =
-                    stackBuilder.getPendingIntent(
-                            0,
-                            PendingIntent.FLAG_UPDATE_CURRENT
-                    );
+            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(resultPendingIntent);
-            NotificationManager mNotificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.notify(12, mBuilder.build());
+
+
             SharedPreferences.Editor notiShownEdit = isFullPref.edit();
             notiShownEdit.putBoolean("notiShown", true);
             notiShownEdit.commit();
@@ -161,6 +166,24 @@ public class FactProduct extends Service {
             SharedPreferences.Editor startedEdit = started.edit();
             startedEdit.putBoolean("FactStarted", false);
             startedEdit.commit();
+        }
+
+        if (ingredient == 0) {
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(FactProduct.this)
+                            .setSmallIcon(R.drawable.icon)
+                            .setContentTitle("Feed the World")
+                            .setContentText("Ingredients are gone!")
+                            .setAutoCancel(true);
+            Intent resultIntent = new Intent(FactProduct.this, MainActivity.class);
+
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(FactProduct.this);
+            stackBuilder.addParentStack(MainActivity.class);
+            stackBuilder.addNextIntent(resultIntent);
+            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            mBuilder.setContentIntent(resultPendingIntent);
+            NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.notify(13, mBuilder.build());
         }
         stopSelf();
     }

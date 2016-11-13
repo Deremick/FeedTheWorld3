@@ -99,7 +99,7 @@ public class Storage extends AppCompatActivity {
             public void run() {
                 try {
                     while (!isInterrupted()) {
-                        Thread.sleep(3600000);
+                        Thread.sleep(60000);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

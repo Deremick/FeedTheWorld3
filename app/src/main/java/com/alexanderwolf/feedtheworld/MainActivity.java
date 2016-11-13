@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     boolean enrichStarted = false;
 
     int storage;
-    int ALLproduct = 0;
+
     boolean megallit = true;
     float Money;
     int pressed;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     boolean firstStart;
     private static TextView MoneyText;
-    boolean firstPress;
+
 
 
     @Override
@@ -65,9 +65,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setAlarmManager();
-        Intent Noti = new Intent(this, Notification.class);
-        startService(Noti);
+        Intent stock = new Intent(this, Stock.class);
+        startService(stock);
+
+     //   setAlarmManager();
+
         MoneyText = (TextView) findViewById(R.id.MoneyText);
 
         SharedPreferences firstPref = getSharedPreferences("FirstStart", Context.MODE_PRIVATE);
@@ -361,17 +363,16 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor FriendsStarted = started.edit();
         FriendsStarted.putBoolean("FriendsStarted", friendsStarted);
         FriendsStarted.commit();
-        firstPress = started.getBoolean("firstStart", true);
 
         final Button startFriends = (Button) findViewById(R.id.Start_Friends);
         startFriends.setClickable(false);
-        if (firstPress) {
-            Intent FriendIntent = new Intent(this, FriendProduct.class);
-            startService(FriendIntent);
 
-            Intent fakeNoti = new Intent(this, FakeNotification.class);
-            startService(fakeNoti);
-        }
+        Intent FriendIntent = new Intent(this, FriendProduct.class);
+        startService(FriendIntent);
+
+        Intent fakeNoti = new Intent(this, FakeNotification.class);
+        startService(fakeNoti);
+
     }
 
 
@@ -506,7 +507,7 @@ public class MainActivity extends AppCompatActivity {
         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
         long l = new Date().getTime();
         if (l < new Date().getTime()) {
-            l += 3600000; // start at next hour
+            l += 3600000;
         }
         am.setRepeating(AlarmManager.RTC_WAKEUP, l, 3600000, sender);
     }

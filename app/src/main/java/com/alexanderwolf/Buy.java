@@ -288,6 +288,7 @@ public class Buy extends AppCompatActivity {
 
         ingredientsSeekBar.setProgress(0);
         IngredientsText.setVisibility(View.VISIBLE);
+        IngredientsText.setText("");
     }
 
     @Override
