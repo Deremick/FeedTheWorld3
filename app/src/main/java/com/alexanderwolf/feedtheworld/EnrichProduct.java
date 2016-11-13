@@ -1,8 +1,10 @@
 package com.alexanderwolf.feedtheworld;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,23 +33,22 @@ public class EnrichProduct extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+         Intent notificationIntent = new Intent(this, MainActivity.class);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, 0);
 
         Notification notification = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.icon)
-                .setContentTitle("My Awesome App")
-                .setContentText("Doing some work...")
+                .setContentTitle("Feed the World")
+                .setContentText("Brugers are on the way")
                 .setContentIntent(pendingIntent).build();
 
-        startForeground(1337, notification);
+        startForeground(2, notification);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
 
         Timer enrichTimer = new Timer();
         enrichTimer.schedule(new TimerTask() {
@@ -63,9 +64,10 @@ public class EnrichProduct extends Service {
                 storage = storagePref.getInt("storage", 0);
                 numberOfEnrich = sumPref.getInt("NOEnrichments", 0);
                 EnrichTimer = EnrichTimerPref.getInt("EnrichTimer", 3);
+                SharedPreferences started = getSharedPreferences("Started", Context.MODE_PRIVATE);
+                boolean enrichStarted = started.getBoolean("EnrichStarted", false);
 
-
-                if (storage - ALLproduct >= numberOfEnrich * 500) {
+                if ((storage - ALLproduct >= numberOfEnrich * 500) && enrichStarted) {
 
                     if (EnrichTimer >= 0 && ingredient > 1) {
                         EnrichTimer--;
@@ -98,31 +100,78 @@ public class EnrichProduct extends Service {
                             Edit.putInt("EnrichProd", EnrichProduct);
                             Edit.commit();
 
+                            SharedPreferences.Editor startedEdit = started.edit();
+                            startedEdit.putBoolean("EnrichStarted", false);
+                            startedEdit.commit();
+                            stopSelf();
+
                         }
 
                     }
                 }
-                else {
+                else if (enrichStarted){
                     EnrichTimer = 3;
                     SharedPreferences.Editor EnrichTimerEditor = EnrichTimerPref.edit();
                     EnrichTimerEditor.putInt("EnrichTimer", EnrichTimer);
                     EnrichTimerEditor.commit();
-                   /* SharedPreferences isFullPref = getSharedPreferences("Storage", Context.MODE_PRIVATE);
+                    SharedPreferences isFullPref = getSharedPreferences("Storage", Context.MODE_PRIVATE);
                     SharedPreferences.Editor isFullEdit = isFullPref.edit();
-                    isFullEdit.putBoolean("isFull", true);
-                    isFullEdit.commit(); */
+                    isFullEdit.putBoolean("EnrichIsFull", true);
+                    isFullEdit.commit();
+
+                    SharedPreferences.Editor startedEdit = started.edit();
+                    startedEdit.putBoolean("EnrichStarted", false);
+                    startedEdit.commit();
+                    stopSelf();
+
 
                 }
             }
 
         }, 1000, 1000);
-        return START_NOT_STICKY;
+
+        return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        SharedPreferences isFullPref = getSharedPreferences("Storage", Context.MODE_PRIVATE);
+        boolean IsFriendFull = isFullPref.getBoolean("FriendIsFull", false);
+        boolean IsFactFull = isFullPref.getBoolean("FactIsFull", false);
+        boolean IsRestFull = isFullPref.getBoolean("RestIsFull", false);
+        boolean IsMineFull = isFullPref.getBoolean("MineIsFull", false);
+        boolean IsEnrichFull = isFullPref.getBoolean("EnrichIsFull", false);
+        boolean notiShown = isFullPref.getBoolean("notiShown", false);
+        if (IsFriendFull && IsFactFull && IsRestFull && IsMineFull && IsEnrichFull && !notiShown) {
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(EnrichProduct.this)
+                            .setSmallIcon(R.drawable.icon)
+                            .setContentTitle("Feed the World")
+                            .setContentText("Storage is Full!");
+            Intent resultIntent = new Intent(EnrichProduct.this, MainActivity.class);
 
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(EnrichProduct.this);
+            stackBuilder.addParentStack(MainActivity.class);
+            stackBuilder.addNextIntent(resultIntent);
+            PendingIntent resultPendingIntent =
+                    stackBuilder.getPendingIntent(
+                            0,
+                            PendingIntent.FLAG_UPDATE_CURRENT
+                    );
+            mBuilder.setContentIntent(resultPendingIntent);
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.notify(12, mBuilder.build());
+            SharedPreferences.Editor notiShownEdit = isFullPref.edit();
+            notiShownEdit.putBoolean("notiShown", true);
+            notiShownEdit.commit();
+            SharedPreferences started = getSharedPreferences("Started", Context.MODE_PRIVATE);
+            SharedPreferences.Editor startedEdit = started.edit();
+            startedEdit.putBoolean("EnrichStarted", false);
+            startedEdit.commit();
+        }
+        stopSelf();
     }
 
     @Override

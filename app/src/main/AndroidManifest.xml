@@ -54,6 +54,14 @@
         <service
             android:name=".FriendProduct"
             android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".FakeNotification"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".Notification"
+            android:enabled="true"
             android:exported="true"></service>
     </application>
 

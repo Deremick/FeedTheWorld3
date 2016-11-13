@@ -11,17 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.alexanderwolf.Buy;
-import com.alexanderwolf.Ingredients;
-import com.alexanderwolf.Settings;
 import com.alexanderwolf.Storage;
 
 import java.text.DecimalFormat;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     boolean firstStart;
     private static TextView MoneyText;
+    boolean firstPress;
 
 
     @Override
@@ -70,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setAlarmManager();
-
-
+        Intent Noti = new Intent(this, Notification.class);
+        startService(Noti);
         MoneyText = (TextView) findViewById(R.id.MoneyText);
 
         SharedPreferences firstPref = getSharedPreferences("FirstStart", Context.MODE_PRIVATE);
@@ -113,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Dialog settings = new Dialog(MainActivity.this);
 
-                settings.setTitle("Settings");
                 settings.setContentView(R.layout.activity_settings);
+                settings.setTitle("Settings");
                 settings.show();
 
                 SharedPreferences pressedPref = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
@@ -126,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     musicOnOff.setText("On");
                 }
+
 
              //   final Button musicOnOff = (Button) settings.findViewById(R.id.musicSwitcher);
                 musicOnOff.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         SharedPreferences numberofFriends = getSharedPreferences("Producters", Context.MODE_PRIVATE);
         numberOfFriends = numberofFriends.getInt("NOFriends", 0);
 
@@ -193,6 +191,10 @@ public class MainActivity extends AppCompatActivity {
         MineProduct = sumPref.getInt("MineProd", 0);
         EnrichProduct = sumPref.getInt("EnrichProd", 0);
 
+        if (numberOfFriends == 0) {
+            final Button startFriend = (Button) findViewById(R.id.Start_Friends);
+            startFriend.setClickable(false);
+        }
         if (numberOfRests == 0) {
             final Button startRest = (Button) findViewById(R.id.start_Restaurant);
             startRest.setClickable(false);
@@ -240,6 +242,16 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                SharedPreferences started = getSharedPreferences("Started", Context.MODE_PRIVATE);
+                                friendsStarted = started.getBoolean("FriendsStarted", false);
+                                restStarted = started.getBoolean("RestStarted", false);
+                                factStarted = started.getBoolean("FactStarted", false);
+                                mineStarted = started.getBoolean("MineStarted", false);
+                                enrichStarted = started.getBoolean("EnrichStarted", false);
+                                if (numberOfFriends > 0 && !friendsStarted) {
+                                    final Button startFriend = (Button) findViewById(R.id.Start_Friends);
+                                    startFriend.setClickable(true);
+                                }
                                 if (numberOfRests > 0 && !restStarted) {
                                     final Button startRest = (Button) findViewById(R.id.start_Restaurant);
                                     startRest.setClickable(true);
@@ -316,16 +328,10 @@ public class MainActivity extends AppCompatActivity {
 
                                     SharedPreferences.Editor sumEdit = sumPref.edit();
                                     sumEdit.putInt("sumProd", productSum + EnrichProduct + MineProduct + FactProduct + RestProduct + FriendProduct);
-                                    sumEdit.commit();
-
                                     sumEdit.putInt("FriendProd", 0);
-                                    sumEdit.commit();
                                     sumEdit.putInt("RestProd", 0);
-                                    sumEdit.commit();
                                     sumEdit.putInt("FactProd", 0);
-                                    sumEdit.commit();
                                     sumEdit.putInt("MineProd", 0);
-                                    sumEdit.commit();
                                     sumEdit.putInt("EnrichProd", 0);
                                     sumEdit.commit();
                                 SharedPreferences ingredient = getSharedPreferences("Ingredients", Context.MODE_PRIVATE);
@@ -351,82 +357,94 @@ public class MainActivity extends AppCompatActivity {
 
     public void startFriends(View view) {
         friendsStarted = true;
+        SharedPreferences started = getSharedPreferences("Started", Context.MODE_PRIVATE);
+        SharedPreferences.Editor FriendsStarted = started.edit();
+        FriendsStarted.putBoolean("FriendsStarted", friendsStarted);
+        FriendsStarted.commit();
+        firstPress = started.getBoolean("firstStart", true);
+
         final Button startFriends = (Button) findViewById(R.id.Start_Friends);
         startFriends.setClickable(false);
-        Intent FriendIntent = new Intent(this, FriendProduct.class);
-        startService(FriendIntent);
+        if (firstPress) {
+            Intent FriendIntent = new Intent(this, FriendProduct.class);
+            startService(FriendIntent);
+
+            Intent fakeNoti = new Intent(this, FakeNotification.class);
+            startService(fakeNoti);
+        }
     }
 
 
     public void startRestaurant(View view) {
         restStarted = true;
+        SharedPreferences started = getSharedPreferences("Started", Context.MODE_PRIVATE);
+        SharedPreferences.Editor Started = started.edit();
+        Started.putBoolean("RestStarted", restStarted);
+        Started.commit();
+
         final Button startRest = (Button) findViewById(R.id.start_Restaurant);
         startRest.setClickable(false);
+
         Intent RestIntent = new Intent(this, RestProduct.class);
         startService(RestIntent);
+
+        Intent fakeNoti = new Intent(this, FakeNotification.class);
+        startService(fakeNoti);
     }
 
     public void startFactory(View view) {
         factStarted = true;
+        SharedPreferences started = getSharedPreferences("Started", Context.MODE_PRIVATE);
+        SharedPreferences.Editor Started = started.edit();
+        Started.putBoolean("FactStarted", factStarted);
+        Started.commit();
+
         final Button startFact = (Button) findViewById(R.id.start_Factory);
         startFact.setClickable(false);
+
         Intent FactIntent = new Intent(this, FactProduct.class);
         startService(FactIntent);
+
+        Intent fakeNoti = new Intent(this, FakeNotification.class);
+        startService(fakeNoti);
     }
 
 
     public void startMine(View view) {
         mineStarted = true;
+        SharedPreferences started = getSharedPreferences("Started", Context.MODE_PRIVATE);
+        SharedPreferences.Editor Started = started.edit();
+        Started.putBoolean("MineStarted", mineStarted);
+        Started.commit();
+
         final Button startMine = (Button) findViewById(R.id.start_BurgerMine);
         startMine.setClickable(false);
+
         Intent MineIntent = new Intent(this, MineProduct.class);
         startService(MineIntent);
 
-
-    /*    Timer mine = new Timer();
-        mine.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                SharedPreferences sumPref = getSharedPreferences("Producters", Context.MODE_PRIVATE);
-                SharedPreferences storagePref = getSharedPreferences("Storage", Context.MODE_PRIVATE);
-                storage = storagePref.getInt("storage", 0);
-                ALLproduct = sumPref.getInt("sumProd", 0);
-                if (ALLproduct < storage) {
-                    if (MineTimer >= 0 && ingredient > 0) {
-                        MineTimer--;
-
-                    }
-                    if (MineTimer == 0 && ingredient > 0) {
-                        MineTimer = 5;
-                    }
-
-                }
-            }
-        }, 1000, 1000); */
+        Intent fakeNoti = new Intent(this, FakeNotification.class);
+        startService(fakeNoti);
     }
 
 
     public void startEnrich(View view) {
         enrichStarted = true;
+        SharedPreferences started = getSharedPreferences("Started", Context.MODE_PRIVATE);
+        SharedPreferences.Editor Started = started.edit();
+        Started.putBoolean("EnrichStarted", enrichStarted);
+        Started.commit();
+
         final Button startEnrich = (Button) findViewById(R.id.start_BurgerEnrichment);
         startEnrich.setClickable(false);
+
         Intent enrichIntent = new Intent(this, com.alexanderwolf.feedtheworld.EnrichProduct.class);
         startService(enrichIntent);
+
+        Intent fakeNoti = new Intent(this, FakeNotification.class);
+        startService(fakeNoti);
     }
 
-   /* public int sumP() {
-
-                if (FriendTimer == 0 || RestTimer == 0 || FactTimer == 0 || MineTimer == 0 || EnrichTimer == 0) {
-                    productSum = FriendProduct + RestProduct + FactProduct + MineProduct + EnrichProduct;
-
-                    SharedPreferences sumPref = getSharedPreferences("Producters", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor sumEdit = sumPref.edit();
-                    sumEdit.putInt("sumProd", productSum);
-                    sumEdit.commit();
-
-                }
-        return productSum;
-    } */
 
     public void Shop(View view) {
         megallit = false;
@@ -476,58 +494,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
- /*   public void Settings() {
-        final Button Settings = (Button) findViewById(R.id.Settings_button);
-
-        Settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Dialog settings = new Dialog(MainActivity.this);
-                settings.setTitle("Settings");
-                settings.setContentView(R.layout.activity_settings);
-                settings.show();
-
-                final ToggleButton musicOnOff = (ToggleButton) settings.findViewById(R.id.toggleButton2);
-                musicOnOff.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (musicOnOff.isChecked()) {
-                            Intent music = new Intent(MainActivity.this, Music_Service.class);
-                            startService(music);
-                        }
-                        if (!(musicOnOff.isChecked())) {
-                            Intent music = new Intent(MainActivity.this, Music_Service.class);
-                            stopService(music);
-                        }
-                    }
-                });
-            }
-        });
-
-
-    } */
-
     public void StorageAct(View view) {
         Intent storageAct = new Intent("com.alexanderwolf.Storage");
         storageAct.setClass(MainActivity.this, Storage.class);
         startActivity(storageAct);
     }
 
-  /*  public void IngredientsShop(View view) {
-        Intent ingredient = new Intent("com.alexanderwolf.Ingredients");
-        ingredient.setClass(MainActivity.this, Ingredients.class);
-        startActivity(ingredient);
-    } */
-
     private void setAlarmManager() {
-        Intent intent = new Intent(this, EnrichProduct.class);
+        Intent intent = new Intent(this, Stock.class);
         PendingIntent sender = PendingIntent.getBroadcast(this, 2, intent, 0);
         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
         long l = new Date().getTime();
         if (l < new Date().getTime()) {
-            l += 10000; // start at next hour
+            l += 3600000; // start at next hour
         }
-        am.setRepeating(AlarmManager.RTC_WAKEUP, l, 10000, sender);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, l, 3600000, sender);
     }
 }
 

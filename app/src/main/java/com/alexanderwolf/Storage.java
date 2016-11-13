@@ -10,8 +10,14 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alexanderwolf.feedtheworld.EnrichProduct;
+import com.alexanderwolf.feedtheworld.FactProduct;
+import com.alexanderwolf.feedtheworld.FakeNotification;
+import com.alexanderwolf.feedtheworld.FriendProduct;
+import com.alexanderwolf.feedtheworld.MineProduct;
 import com.alexanderwolf.feedtheworld.Music_Service;
 import com.alexanderwolf.feedtheworld.R;
+import com.alexanderwolf.feedtheworld.RestProduct;
 import com.alexanderwolf.feedtheworld.Stock;
 
 import java.text.DecimalFormat;
@@ -36,7 +42,7 @@ public class Storage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_storage);
 
-        SellProduct();
+        SellProductSeekBar();
 
         final TextView prod = (TextView) findViewById(R.id.Products);
         final TextView arf = (TextView) findViewById(R.id.arfolyam);
@@ -147,17 +153,42 @@ public class Storage extends AppCompatActivity {
 
         SharedPreferences.Editor prodEdit = Product.edit();
         prodEdit.putInt("sumProd", allProduct);
-        prodEdit.commit();
         prodEdit.putInt("FriendProd", 0);
-        prodEdit.commit();
         prodEdit.putInt("RestProd", 0);
-        prodEdit.commit();
         prodEdit.putInt("FactProd", 0);
-        prodEdit.commit();
         prodEdit.putInt("MineProd", 0);
-        prodEdit.commit();
         prodEdit.putInt("EnrichProd", 0);
         prodEdit.commit();
+
+        SharedPreferences isFullPref = getSharedPreferences("Storage", Context.MODE_PRIVATE);
+        SharedPreferences.Editor isFullEdit = isFullPref.edit();
+        isFullEdit.putBoolean("FriendIsFull", false);
+        isFullEdit.putBoolean("RestIsFull", false);
+        isFullEdit.putBoolean("FactIsFull", false);
+        isFullEdit.putBoolean("MineIsFull", false);
+        isFullEdit.putBoolean("EnrichIsFull", false);
+        isFullEdit.putBoolean("notiShown", false);
+        isFullEdit.commit();
+
+        SharedPreferences started = getSharedPreferences("Started", Context.MODE_PRIVATE);
+        SharedPreferences.Editor startedEdit = started.edit();
+        startedEdit.putBoolean("firsStart", false);
+        startedEdit.commit();
+
+     /*   Intent a = new Intent(this, FriendProduct.class);
+        startService(a);
+        Intent b = new Intent(this, RestProduct.class);
+        startService(b);
+        Intent c = new Intent(this, FactProduct.class);
+        startService(c);
+        Intent d = new Intent(this, MineProduct.class);
+        startService(d);
+        Intent e = new Intent(this, EnrichProduct.class);
+        startService(e);
+        Intent fakeNoti = new Intent(this, FakeNotification.class);
+        startService(fakeNoti); */
+
+
     }
 
     @Override
@@ -206,7 +237,7 @@ public class Storage extends AppCompatActivity {
 
     }
 
-    public void SellProduct() {
+    public void SellProductSeekBar() {
         ProductsSeekBar = (SeekBar) findViewById(R.id.ProductsSeekBar);
         ProductSelected = (TextView) findViewById(R.id.ProductsSelected);
         SharedPreferences Product = getSharedPreferences("Producters", Context.MODE_PRIVATE);

@@ -34,11 +34,11 @@ public class Stock extends Service {
 
         Notification notification = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.icon)
-                .setContentTitle("My Awesome App")
-                .setContentText("Doing some work...")
+                .setContentTitle("Feed the World")
+                .setContentText("New Stock Value!")
                 .setContentIntent(pendingIntent).build();
 
-        startForeground(1337, notification);
+        startForeground(3, notification);
     }
 
     @Override
@@ -68,6 +68,7 @@ public class Stock extends Service {
                     ArfolyamEdit.putFloat("arfolyam", CurrentArfolyam);
                     ArfolyamEdit.commit();
                 }
+                stopSelf();
             }
         }, 1000, 1000);
 
@@ -78,7 +79,7 @@ public class Stock extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        stopSelf();
+        stopForeground(true);
     }
 
     @Override
