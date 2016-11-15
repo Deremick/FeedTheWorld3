@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         Intent stock = new Intent(this, Stock.class);
         startService(stock);
 
-     //   setAlarmManager();
+        setAlarmManager();
 
         MoneyText = (TextView) findViewById(R.id.MoneyText);
 
