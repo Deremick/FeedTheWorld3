@@ -12,22 +12,8 @@
     tools:context="com.alexanderwolf.feedtheworld.MainActivity"
     android:background="@mipmap/background">
 
-    <TextView
-        android:text="Timers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView10"
-        android:textColor="@android:color/black"
-        android:textAlignment="center"
-        android:textStyle="normal|bold"
-        android:textSize="24sp"
-        android:layout_above="@+id/Shop"
-        android:layout_alignRight="@+id/Shop"
-        android:layout_alignEnd="@+id/Shop" />
-
     <Button
         android:text="BurgerMine"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/start_BurgerMine"
         android:layout_marginTop="26dp"
@@ -39,36 +25,7 @@
         android:textSize="18sp"
         android:onClick="startMine"
         android:background="@drawable/button"
-        android:layout_alignRight="@+id/start_Factory"
-        android:layout_alignEnd="@+id/start_Factory" />
-
-    <TextView
-        android:text="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Timer_Factory"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/Timer_Restaurant"
-        android:layout_alignStart="@+id/Timer_Restaurant"
-        android:textSize="24sp"
-        android:layout_alignParentBottom="false"
-        android:textColor="?android:attr/textColorPrimaryDisableOnly"
-        android:textAlignment="center"
-        android:textStyle="normal|bold" />
-
-    <TextView
-        android:text="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/start_Restaurant"
-        android:layout_alignRight="@+id/Timer_Friends"
-        android:layout_alignEnd="@+id/Timer_Friends"
-        android:layout_marginBottom="12dp"
-        android:id="@+id/Timer_Restaurant"
-        android:textSize="24sp"
-        android:textColor="?android:attr/textColorPrimaryDisableOnly"
-        android:textAlignment="center"
-        android:textStyle="normal|bold" />
+        android:layout_width="120dp" />
 
     <TextView
         android:text="0"
@@ -81,54 +38,6 @@
         android:textSize="24sp"
         android:textStyle="normal|bold"
         android:textColor="@android:color/background_light" />
-
-    <Button
-        android:text="Friends"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Start_Friends"
-        android:onClick="startFriends"
-        android:textStyle="normal|bold"
-        android:textAllCaps="false"
-        android:layout_alignBaseline="@+id/Timer_Friends"
-        android:layout_alignBottom="@+id/Timer_Friends"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="18sp"
-        android:background="@drawable/button"
-        android:layout_alignRight="@+id/start_BurgerEnrichment"
-        android:layout_alignEnd="@+id/start_BurgerEnrichment" />
-
-    <TextView
-        android:text="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/NumberOfFriends"
-        android:layout_alignBaseline="@+id/Timer_Friends"
-        android:layout_alignBottom="@+id/Timer_Friends"
-        android:layout_toRightOf="@+id/Timer_Friends"
-        android:layout_toEndOf="@+id/Timer_Friends"
-        android:layout_marginLeft="65dp"
-        android:layout_marginStart="65dp"
-        android:textSize="24sp"
-        android:textStyle="normal|bold"
-        android:textColor="@android:color/background_light" />
-
-    <TextView
-        android:text="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="98dp"
-        android:id="@+id/Timer_Friends"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/start_Restaurant"
-        android:layout_toEndOf="@+id/start_Restaurant"
-        android:layout_marginLeft="47dp"
-        android:layout_marginStart="47dp"
-        android:textSize="24sp"
-        android:textColor="?android:attr/textColorPrimaryDisableOnly"
-        android:textAlignment="center"
-        android:textStyle="normal|bold" />
 
     <TextView
         android:text="0"
@@ -146,34 +55,6 @@
         android:text="0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/Timer_Mine"
-        android:layout_alignBaseline="@+id/start_BurgerMine"
-        android:layout_alignBottom="@+id/start_BurgerMine"
-        android:layout_alignLeft="@+id/Timer_Factory"
-        android:layout_alignStart="@+id/Timer_Factory"
-        android:textSize="24sp"
-        android:textColor="?android:attr/textColorPrimaryDisableOnly"
-        android:textAlignment="center"
-        android:textStyle="normal|bold" />
-
-    <TextView
-        android:text="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Timer_Enrich"
-        android:textSize="24sp"
-        android:layout_alignBaseline="@+id/NumberOfEnrich"
-        android:layout_alignBottom="@+id/NumberOfEnrich"
-        android:layout_alignLeft="@+id/Timer_Mine"
-        android:layout_alignStart="@+id/Timer_Mine"
-        android:textColor="?android:attr/textColorPrimaryDisableOnly"
-        android:textAlignment="center"
-        android:textStyle="normal|bold" />
-
-    <TextView
-        android:text="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/NumberOfEnrich"
         android:textSize="24sp"
         android:textStyle="normal|bold"
@@ -182,17 +63,6 @@
         android:layout_alignLeft="@+id/NumberOfMine"
         android:layout_alignStart="@+id/NumberOfMine"
         android:textColor="@android:color/background_light" />
-
-    <TextView
-        android:text="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/NumberOfEnrich"
-        android:layout_alignLeft="@+id/storage"
-        android:layout_alignStart="@+id/storage"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:id="@+id/MoneyText" />
 
     <Button
         android:text="Factory"
@@ -211,23 +81,6 @@
         android:layout_alignEnd="@+id/start_Restaurant" />
 
     <Button
-        android:text="Restaurant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/start_Restaurant"
-        android:onClick="startRestaurant"
-        android:layout_marginTop="28dp"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:background="@drawable/button"
-        android:layout_below="@+id/Start_Friends"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/Start_Friends"
-        android:layout_alignEnd="@+id/Start_Friends" />
-
-    <Button
         android:text="Burger\nEnrichmenter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -242,29 +95,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="26dp"
-        android:layout_toStartOf="@+id/Shop" />
-
-    <TextView
-        android:text="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/IngredientsText"
-        android:layout_above="@+id/NumberOfMine"
-        android:layout_alignRight="@+id/storage"
-        android:layout_alignEnd="@+id/storage"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp" />
-
-    <Button
-        android:text="Shop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Shop"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:onClick="Shop"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_toLeftOf="@+id/SUM"
+        android:layout_toStartOf="@+id/SUM" />
 
     <TextView
         android:text="Number Of..."
@@ -274,25 +106,10 @@
         android:textColor="@android:color/background_light"
         android:textAlignment="center"
         android:textStyle="normal|bold"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:layout_above="@+id/Start_Friends"
         android:layout_alignRight="@+id/storage"
         android:layout_alignEnd="@+id/storage" />
-
-    <TextView
-        android:text="0/0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/SUM"
-        android:textStyle="normal|bold"
-        android:textSize="24sp"
-        android:layout_marginRight="26dp"
-        android:layout_marginEnd="26dp"
-        android:textColor="@android:color/black"
-        android:layout_alignBaseline="@+id/Settings_button"
-        android:layout_alignBottom="@+id/Settings_button"
-        android:layout_toLeftOf="@+id/Timer_Restaurant"
-        android:layout_toStartOf="@+id/Timer_Restaurant" />
 
     <TextView
         android:text="0"
@@ -314,8 +131,8 @@
         android:id="@+id/Settings_button"
         android:textSize="9sp"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/IngredientsText"
-        android:layout_toStartOf="@+id/IngredientsText" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:text="storage"
@@ -325,6 +142,193 @@
         android:onClick="StorageAct"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/button"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="0/0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SUM"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/textView10"
+        android:layout_toStartOf="@+id/textView10" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MoneyText"
+        android:textColor="@android:color/black"
+        android:textStyle="normal|bold"
+        android:layout_alignBottom="@+id/Settings_button"
+        android:layout_alignRight="@+id/start_BurgerEnrichment"
+        android:layout_alignEnd="@+id/start_BurgerEnrichment" />
+
+    <Button
+        android:text="Shop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Shop"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:onClick="Shop"
+        android:layout_marginRight="11dp"
+        android:layout_marginEnd="11dp"
+        android:layout_alignBaseline="@+id/storage"
+        android:layout_alignBottom="@+id/storage"
+        android:layout_toLeftOf="@+id/storage"
+        android:layout_toStartOf="@+id/storage"
+        android:background="@drawable/button" />
+
+    <TextView
+        android:text="Ingredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView12"
+        android:textStyle="normal|bold"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:layout_alignBaseline="@+id/IngredientsText"
+        android:layout_alignBottom="@+id/IngredientsText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/NumberOfFriends"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="29dp"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:textColor="@android:color/background_light"
+        android:layout_alignBaseline="@+id/Timer_Friends"
+        android:layout_alignBottom="@+id/Timer_Friends"
+        android:layout_alignLeft="@+id/Settings_button"
+        android:layout_alignStart="@+id/Settings_button" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Timer_Mine"
+        android:textSize="24sp"
+        android:textColor="?android:attr/textColorPrimaryDisableOnly"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:layout_alignBaseline="@+id/start_BurgerMine"
+        android:layout_alignBottom="@+id/start_BurgerMine"
+        android:layout_marginLeft="170dp" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Timer_Enrich"
+        android:textSize="24sp"
+        android:textColor="?android:attr/textColorPrimaryDisableOnly"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:layout_alignBaseline="@+id/NumberOfEnrich"
+        android:layout_alignBottom="@+id/NumberOfEnrich"
+        android:layout_marginLeft="170dp" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Timer_Factory"
+        android:textSize="24sp"
+        android:textColor="?android:attr/textColorPrimaryDisableOnly"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:layout_alignBaseline="@+id/start_Factory"
+        android:layout_alignBottom="@+id/start_Factory"
+        android:layout_marginLeft="170dp" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/IngredientsText"
+        android:textColor="@android:color/black"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/MoneyText"
+        android:layout_marginLeft="140dp" />
+
+    <Button
+        android:text="Restaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/start_Restaurant"
+        android:onClick="startRestaurant"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:background="@drawable/button"
+        android:layout_marginBottom="21dp"
+        android:layout_above="@+id/start_Factory"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Timer_Friends"
+        android:textSize="24sp"
+        android:textColor="?android:attr/textColorPrimaryDisableOnly"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:layout_marginBottom="31dp"
+        android:layout_above="@+id/start_Restaurant"
+        android:layout_marginLeft="170dp" />
+
+    <Button
+        android:text="Friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Start_Friends"
+        android:onClick="startFriends"
+        android:textStyle="normal|bold"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:background="@drawable/button"
+        android:layout_alignBaseline="@+id/Timer_Friends"
+        android:layout_alignBottom="@+id/Timer_Friends"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Timer_Restaurant"
+        android:textSize="24sp"
+        android:textColor="?android:attr/textColorPrimaryDisableOnly"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:layout_alignBaseline="@+id/start_Restaurant"
+        android:layout_alignBottom="@+id/start_Restaurant"
+        android:layout_marginLeft="170dp" />
+
+    <TextView
+        android:text="Timers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView10"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
+        android:layout_below="@+id/start_BurgerEnrichment"
+        android:layout_toLeftOf="@+id/textView9"
+        android:layout_toStartOf="@+id/textView9" />
 
 </RelativeLayout>
