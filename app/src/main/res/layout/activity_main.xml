@@ -135,7 +135,8 @@
         android:layout_alignParentEnd="true"
         android:background="@drawable/button"
         android:textStyle="normal|bold"
-        android:layout_toEndOf="@+id/Shop" />
+        android:layout_toEndOf="@+id/Shop"
+        android:layout_toRightOf="@+id/Shop"/>
 
     <Button
         android:text="storage"
@@ -159,6 +160,7 @@
         android:textColor="@android:color/black"
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/textView10"
+        android:layout_toLeftOf="@+id/textView10"
         android:layout_alignRight="@+id/Shop"
         android:layout_alignEnd="@+id/Shop"
         android:text="0/0" />
@@ -251,7 +253,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/IngredientsText"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textStyle="normal|bold"
         android:layout_below="@+id/MoneyText"
         android:layout_marginLeft="80dp" />
@@ -322,14 +324,13 @@
         android:textStyle="normal|bold"
         android:textSize="18sp"
         android:layout_below="@+id/start_BurgerEnrichment"
-        android:layout_toLeftOf="@+id/textView9"
-        android:layout_toStartOf="@+id/textView9" />
+        android:layout_marginLeft="145dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/MoneyText"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textStyle="normal|bold"
         android:layout_alignBottom="@+id/Settings_button"
         android:layout_marginLeft="80dp"

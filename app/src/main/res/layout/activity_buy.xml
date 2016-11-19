@@ -65,7 +65,7 @@
         android:layout_below="@+id/Shop"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="7dp"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textStyle="normal|bold" />
 
     <Button
@@ -134,7 +134,7 @@
         android:id="@+id/textView6"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="0dp"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textStyle="normal|bold" />
 
     <TextView
@@ -144,7 +144,7 @@
         android:id="@+id/textView5"
         android:layout_above="@+id/buy_factory"
         android:layout_marginLeft="0dp"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textStyle="normal|bold" />
 
     <TextView
@@ -155,7 +155,7 @@
         android:layout_below="@+id/buy_rest"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="8dp"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textStyle="normal|bold" />
 
     <TextView
@@ -165,7 +165,7 @@
         android:id="@+id/textView3"
         android:layout_below="@+id/buy_factory"
         android:layout_marginLeft="0dp"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textStyle="normal|bold" />
 
     <TextView
@@ -174,7 +174,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
         android:layout_marginTop="7dp"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textStyle="normal|bold"
         android:layout_below="@+id/buy_mine"
         android:layout_marginLeft="0dp" />
@@ -196,7 +196,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/MoneyText"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textStyle="normal|bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
