@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     boolean megallit = true;
     float Money;
     int pressed;
+    int NotiPressed;
+    boolean isNotiOn;
     boolean isGoing;
 
     boolean firstStart;
@@ -122,7 +124,9 @@ public class MainActivity extends AppCompatActivity {
 
                 SharedPreferences pressedPref = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
                 pressed = pressedPref.getInt("pressed", 1);
+                NotiPressed = pressedPref.getInt("NotiPressed", 0);
                 final Button musicOnOff = (Button) settings.findViewById(R.id.musicSwitcher);
+                final Button notiOnOff = (Button) settings.findViewById(R.id.notiOnOff);
                 if (pressed % 2 != 0) {
                     musicOnOff.setText("Off");
                 }
@@ -130,8 +134,14 @@ public class MainActivity extends AppCompatActivity {
                     musicOnOff.setText("On");
                 }
 
+                if (NotiPressed % 2 != 0) {
+                    notiOnOff.setText("On");
+                }
+                else {
+                    notiOnOff.setText("Off");
+                }
 
-             //   final Button musicOnOff = (Button) settings.findViewById(R.id.musicSwitcher);
+
                 musicOnOff.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -141,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
                         if (pressed % 2 != 0) {
                             Intent music = new Intent(MainActivity.this, Music_Service.class);
                             startService(music);
-                            //   SharedPreferences pressedPref = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
                             pressed++;
                             SharedPreferences.Editor pressedEdit = pressedPref.edit();
                             pressedEdit.putInt("pressed", pressed);
@@ -156,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
                         else {
                             Intent music = new Intent(MainActivity.this, Music_Service.class);
                             stopService(music);
-                            //    SharedPreferences pressedPref = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
                             pressed++;
                             SharedPreferences.Editor pressedEdit = pressedPref.edit();
                             pressedEdit.putInt("pressed", pressed);
@@ -167,6 +175,32 @@ public class MainActivity extends AppCompatActivity {
                             musicOnOff.setText("Off");
 
 
+                        }
+                    }
+                });
+                isNotiOn = pressedPref.getBoolean("isNotiOn", true);
+                notiOnOff.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SharedPreferences pressedPref = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
+                        NotiPressed = pressedPref.getInt("NotiPressed", 0);
+                        if (NotiPressed % 2 != 0) {
+                            isNotiOn = false;
+                            SharedPreferences.Editor isNotiEdit = pressedPref.edit();
+                            isNotiEdit.putBoolean("isNotiOn", isNotiOn);
+                            NotiPressed++;
+                            isNotiEdit.putInt("NotiPressed", NotiPressed);
+                            isNotiEdit.commit();
+                            notiOnOff.setText("Off");
+                        }
+                        else {
+                            isNotiOn = true;
+                            SharedPreferences.Editor isNotiEdit = pressedPref.edit();
+                            isNotiEdit.putBoolean("isNotiOn", isNotiOn);
+                            NotiPressed++;
+                            isNotiEdit.putInt("NotiPressed", NotiPressed);
+                            isNotiEdit.commit();
+                            notiOnOff.setText("On");
                         }
                     }
                 });
@@ -315,7 +349,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 SharedPreferences money = getSharedPreferences("Money", Context.MODE_PRIVATE);
                                 Money = money.getFloat("money", 0);
-                                MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
+                                MoneyText.setText(new DecimalFormat("###,###,###.##").format(Money) + " $$");
 
                                 SharedPreferences sumPref = getSharedPreferences("Producters", Context.MODE_PRIVATE);
                                 productSum = sumPref.getInt("sumProd", 0);
@@ -471,7 +505,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (megallit == true) {
+        if (megallit) {
             Intent music = new Intent(this, Music_Service.class);
             stopService(music);
             megallit = false;
@@ -481,12 +515,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (megallit == false) {
+        if (!megallit) {
             SharedPreferences pressedPref = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
             pressed = pressedPref.getInt("pressed", 1);
             isGoing = pressedPref.getBoolean("isGoing", false);
 
-            if ((pressed % 2 == 0) && isGoing == false) {
+            if ((pressed % 2 == 0) && !isGoing) {
                 Intent music = new Intent(MainActivity.this, Music_Service.class);
                 startService(music);
             }

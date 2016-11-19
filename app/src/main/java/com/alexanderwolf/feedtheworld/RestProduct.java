@@ -104,7 +104,7 @@ public class RestProduct extends Service {
                         }
 
                     }
-                    else if (ingredient == 0 || RestTimer == -1){
+                    else if (ingredient <= 1 || RestTimer == -1){
                         RestTimer = 10;
                         SharedPreferences.Editor RestTimerEditor = RestTimerPref.edit();
                         RestTimerEditor.putInt("RestTimer", RestTimer);
@@ -151,14 +151,16 @@ public class RestProduct extends Service {
         super.onDestroy();
         SharedPreferences isFullPref = getSharedPreferences("Storage", Context.MODE_PRIVATE);
         SharedPreferences Ingredient = getSharedPreferences("Ingredients", Context.MODE_PRIVATE);
+        SharedPreferences notiState = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
         boolean IsFriendFull = isFullPref.getBoolean("FriendIsFull", false);
         boolean IsFactFull = isFullPref.getBoolean("FactIsFull", false);
         boolean IsRestFull = isFullPref.getBoolean("RestIsFull", false);
         boolean IsMineFull = isFullPref.getBoolean("MineIsFull", false);
         boolean IsEnrichFull = isFullPref.getBoolean("EnrichIsFull", false);
         boolean notiShown = isFullPref.getBoolean("notiShown", false);
+        boolean isNotiOn = notiState.getBoolean("isNotiOn", true);
         ingredient = Ingredient.getInt("ingredients", 0);
-        if ((IsFriendFull || IsFactFull || IsRestFull || IsMineFull || IsEnrichFull) && !notiShown) {
+        if (((IsFriendFull || IsFactFull || IsRestFull || IsMineFull || IsEnrichFull) && !notiShown) && isNotiOn) {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(RestProduct.this)
                             .setSmallIcon(R.drawable.icon)
@@ -188,7 +190,7 @@ public class RestProduct extends Service {
             startedEdit.commit();
         }
 
-        if (ingredient == 0) {
+        if (ingredient <= 1 && isNotiOn) {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(RestProduct.this)
                             .setSmallIcon(R.drawable.icon)

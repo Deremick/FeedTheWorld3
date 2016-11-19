@@ -115,7 +115,7 @@ public class EnrichProduct extends Service {
 
                     }
 
-                    else if (ingredient == 0 || EnrichTimer == -1) {
+                    else if (ingredient <= 1 || EnrichTimer == -1) {
                         EnrichTimer = 3;
                         SharedPreferences.Editor EnrichTimerEditor = EnrichTimerPref.edit();
                         EnrichTimerEditor.putInt("EnrichTimer", EnrichTimer);
@@ -164,14 +164,16 @@ public class EnrichProduct extends Service {
         super.onDestroy();
         SharedPreferences isFullPref = getSharedPreferences("Storage", Context.MODE_PRIVATE);
         SharedPreferences Ingredient = getSharedPreferences("Ingredients", Context.MODE_PRIVATE);
+        SharedPreferences notiState = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
         boolean IsFriendFull = isFullPref.getBoolean("FriendIsFull", false);
         boolean IsFactFull = isFullPref.getBoolean("FactIsFull", false);
         boolean IsRestFull = isFullPref.getBoolean("RestIsFull", false);
         boolean IsMineFull = isFullPref.getBoolean("MineIsFull", false);
         boolean IsEnrichFull = isFullPref.getBoolean("EnrichIsFull", false);
         boolean notiShown = isFullPref.getBoolean("notiShown", false);
+        boolean isNotiOn = notiState.getBoolean("isNotiOn", true);
         ingredient = Ingredient.getInt("ingredients", 0);
-        if ((IsFriendFull || IsFactFull || IsRestFull || IsMineFull || IsEnrichFull) && !notiShown) {
+        if (((IsFriendFull || IsFactFull || IsRestFull || IsMineFull || IsEnrichFull) && !notiShown) && isNotiOn) {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(EnrichProduct.this)
                             .setSmallIcon(R.drawable.icon)
@@ -199,7 +201,7 @@ public class EnrichProduct extends Service {
             startedEdit.commit();
         }
 
-        if (ingredient == 0) {
+        if (ingredient <= 1 && isNotiOn) {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(EnrichProduct.this)
                             .setSmallIcon(R.drawable.icon)

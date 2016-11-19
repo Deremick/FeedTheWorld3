@@ -12,24 +12,6 @@
     android:background="@mipmap/background">
 
 
-<TextView
-        android:text="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:id="@+id/Products" />
-
-    <TextView
-        android:text="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sell_product"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="74dp"
-        android:id="@+id/money" />
-
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,46 +20,107 @@
         android:id="@+id/ProductsSeekBar"
         android:max="1000" />
 
-    <Button
-        android:text="new stock value (50,000 $$)"
+    <TextView
+        android:text="Products:"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView11"
+        android:textColor="@android:color/black"
+        android:textStyle="normal|bold"
+        android:layout_alignBaseline="@+id/Products"
+        android:layout_alignBottom="@+id/Products"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Money:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView13"
+        android:textStyle="normal|bold"
+        android:textColor="@android:color/black"
+        android:layout_alignBaseline="@+id/money"
+        android:layout_alignBottom="@+id/money"
+        android:layout_marginLeft="0dp" />
+
+    <Button
+        android:text="sell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sell_product"
+        android:onClick="sell"
+        android:background="@drawable/button"
+        android:layout_below="@+id/ProductsSeekBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="new\nstock value (50,000 $$)"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button4"
         android:onClick="newStock"
+        android:background="@drawable/button"
+        android:layout_marginBottom="15dp"
+        android:textStyle="normal|bold"
         android:layout_above="@+id/ProductsSeekBar"
-        android:layout_toLeftOf="@+id/sell_product"
-        android:layout_toStartOf="@+id/sell_product"
-        android:layout_marginBottom="82dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Exchange rate:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/arfolyam"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView14"
+        android:textStyle="normal|bold"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:id="@+id/Products"
+        android:textColor="@android:color/black"
+        android:textStyle="normal|bold"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="157dp" />
 
     <TextView
         android:text="0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/arfolyam"
-        android:layout_alignBaseline="@+id/button4"
-        android:layout_alignBottom="@+id/button4"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text="sell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
-        android:id="@+id/sell_product"
-        android:onClick="sell"
-        android:layout_below="@+id/ProductsSeekBar"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="130dp"
+        android:layout_alignParentTop="true"
+        android:textStyle="normal|bold"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="157dp" />
 
     <TextView
         android:text="0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/sell_product"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginBottom="40dp"
-        android:id="@+id/ProductsSelected" />
+        android:id="@+id/money"
+        android:textColor="@android:color/black"
+        android:textStyle="normal|bold"
+        android:layout_marginBottom="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="80dp" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ProductsSelected"
+        android:textColor="@android:color/black"
+        android:textStyle="normal|bold"
+        android:layout_marginBottom="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="0dp"/>
 
 </RelativeLayout>

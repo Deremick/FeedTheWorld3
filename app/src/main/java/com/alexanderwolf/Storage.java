@@ -179,20 +179,6 @@ public class Storage extends AppCompatActivity {
         startedEdit.putBoolean("firsStart", false);
         startedEdit.commit();
 
-     /*   Intent a = new Intent(this, FriendProduct.class);
-        startService(a);
-        Intent b = new Intent(this, RestProduct.class);
-        startService(b);
-        Intent c = new Intent(this, FactProduct.class);
-        startService(c);
-        Intent d = new Intent(this, MineProduct.class);
-        startService(d);
-        Intent e = new Intent(this, EnrichProduct.class);
-        startService(e);
-        Intent fakeNoti = new Intent(this, FakeNotification.class);
-        startService(fakeNoti); */
-
-
     }
 
     @Override
