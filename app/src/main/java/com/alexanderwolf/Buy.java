@@ -1,6 +1,6 @@
 package com.alexanderwolf;
 
-import android.bluetooth.BluetoothClass;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,13 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alexanderwolf.feedtheworld.MainActivity;
+
 import com.alexanderwolf.feedtheworld.Music_Service;
 import com.alexanderwolf.feedtheworld.R;
 
@@ -54,19 +53,19 @@ public class Buy extends AppCompatActivity {
         MoneyText = (TextView) findViewById(R.id.MoneyText);
         MoneyText.setText("Money: " + new DecimalFormat("###,###,###.##").format(Money) + " $$");
 
-        SharedPreferences numberOfFriends = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfFriends = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         numberOfFriend = numberOfFriends.getInt("NOFriends", 0);
 
-        SharedPreferences numberOfRests = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfRests = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         numberOfRestaurant = numberOfRests.getInt("NORests", 0);
 
-        SharedPreferences numberOfFactories = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfFactories = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         numberOfFactory = numberOfFactories.getInt("NOFacts", 0);
 
-        SharedPreferences numberOfMines = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfMines = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         numberOfMine = numberOfMines.getInt("NOMines", 0);
 
-        SharedPreferences numberOfEnrichments = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfEnrichments = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         numberOfEnrich = numberOfEnrichments.getInt("NOEnrichments", 0);
 
         SharedPreferences storagePref = getSharedPreferences("Storage", Context.MODE_PRIVATE);
@@ -77,7 +76,7 @@ public class Buy extends AppCompatActivity {
 
     public void buyFriend(View view) {
 
-        SharedPreferences numberOfFriends = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfFriends = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         SharedPreferences money = getSharedPreferences("Money", Context.MODE_PRIVATE);
         Money = money.getFloat("money", 0);
         if (Money > 100) {
@@ -101,7 +100,7 @@ public class Buy extends AppCompatActivity {
 
     public void buyRestaurant(View view) {
 
-        SharedPreferences numberOfRests = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfRests = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         SharedPreferences money = getSharedPreferences("Money", Context.MODE_PRIVATE);
         Money = money.getFloat("money", 0);
         if (Money > 5000) {
@@ -124,7 +123,7 @@ public class Buy extends AppCompatActivity {
 
     public void buyFactory(View view) {
 
-        SharedPreferences numberOfFactories = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfFactories = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         SharedPreferences money = getSharedPreferences("Money", Context.MODE_PRIVATE);
         Money = money.getFloat("money", 0);
         if (Money > 50000) {
@@ -146,7 +145,7 @@ public class Buy extends AppCompatActivity {
     }
 
     public void buyMine(View view) {
-        SharedPreferences numberOfMines = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfMines = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         SharedPreferences money = getSharedPreferences("Money", Context.MODE_PRIVATE);
         Money = money.getFloat("money", 0);
         if (Money > 1500000) {
@@ -169,7 +168,7 @@ public class Buy extends AppCompatActivity {
 
     public void buyEnrich(View view) {
 
-        SharedPreferences numberOfEnrichments = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfEnrichments = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         SharedPreferences money = getSharedPreferences("Money", Context.MODE_PRIVATE);
         Money = money.getFloat("money", 0);
         if (Money > 10000000) {
@@ -188,10 +187,6 @@ public class Buy extends AppCompatActivity {
         else {
             Toast.makeText(this, "You don't have enough money :(", Toast.LENGTH_SHORT).show();
         }
-
-
-      /*  final Button start = (Button) findViewById(R.id.start_BurgerEnrichment);
-        start.setClickable(true); */
 
     }
 
@@ -316,7 +311,7 @@ public class Buy extends AppCompatActivity {
         pressed = pressedPref.getInt("pressed", 1);
         isGoing = pressedPref.getBoolean("isGoing", false);
 
-        if ((pressed % 2 == 0) && isGoing == false) {
+        if ((pressed % 2 == 0) && !isGoing) {
             Intent music = new Intent(Buy.this, Music_Service.class);
             startService(music);
         } else {
@@ -326,6 +321,5 @@ public class Buy extends AppCompatActivity {
 
 
     }
-    //pah
 }
 

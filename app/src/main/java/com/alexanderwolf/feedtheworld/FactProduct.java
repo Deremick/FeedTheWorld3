@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
-import android.widget.Button;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -48,7 +47,7 @@ public class FactProduct extends Service {
         fact.schedule(new TimerTask() {
             @Override
             public void run() {
-                SharedPreferences sumPref = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+                SharedPreferences sumPref = getSharedPreferences("Producers", Context.MODE_PRIVATE);
                 SharedPreferences storagePref = getSharedPreferences("Storage", Context.MODE_PRIVATE);
                 SharedPreferences FactTimerPref = getSharedPreferences("Timers", Context.MODE_PRIVATE);
                 SharedPreferences Ingredient = getSharedPreferences("Ingredients", Context.MODE_PRIVATE);

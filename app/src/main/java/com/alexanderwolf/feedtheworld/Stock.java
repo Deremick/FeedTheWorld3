@@ -8,9 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
 
-import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,7 +30,6 @@ public class Stock extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //return super.onStartCommand(intent, flags, startId);
 
         final Timer a = new Timer();
         a.scheduleAtFixedRate(new TimerTask() {

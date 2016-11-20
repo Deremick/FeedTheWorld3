@@ -12,14 +12,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alexanderwolf.feedtheworld.EnrichProduct;
-import com.alexanderwolf.feedtheworld.FactProduct;
-import com.alexanderwolf.feedtheworld.FakeNotification;
-import com.alexanderwolf.feedtheworld.FriendProduct;
-import com.alexanderwolf.feedtheworld.MineProduct;
 import com.alexanderwolf.feedtheworld.Music_Service;
 import com.alexanderwolf.feedtheworld.R;
-import com.alexanderwolf.feedtheworld.RestProduct;
+
 import com.alexanderwolf.feedtheworld.Stock;
 
 import java.text.DecimalFormat;
@@ -47,10 +42,9 @@ public class Storage extends AppCompatActivity {
         setContentView(R.layout.activity_storage);
 
         SellProductSeekBar();
-
         final TextView prod = (TextView) findViewById(R.id.Products);
         final TextView arf = (TextView) findViewById(R.id.arfolyam);
-        SharedPreferences Product = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences Product = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         int allProduct = Product.getInt("sumProd", 0);
         SharedPreferences Arfolyam = getSharedPreferences("Arfolyam", Context.MODE_PRIVATE);
         q = Arfolyam.getFloat("arfolyam", 20);
@@ -77,8 +71,7 @@ public class Storage extends AppCompatActivity {
                             public void run() {
 
                                 final TextView prod = (TextView) findViewById(R.id.Products);
-                           //     final TextView arf = (TextView) findViewById(R.id.arfolyam);
-                                SharedPreferences Product = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+                                SharedPreferences Product = getSharedPreferences("Producers", Context.MODE_PRIVATE);
                                 int allproduct = Product.getInt("sumProd", 0);
                                 prod.setText(new DecimalFormat("###,###,###").format(allproduct));
                                 SharedPreferences Moneyka = getSharedPreferences("Money", Context.MODE_PRIVATE);
@@ -114,8 +107,6 @@ public class Storage extends AppCompatActivity {
                                 q = Arfolyam.getFloat("arfolyam", 20);
                                 arf.setText(new DecimalFormat("##.##").format(q) + " $$");
 
-                                //Intent Stock = new Intent(Storage.this, Stock.class);
-                               // stopService(new Intent (Storage.this, Stock.class));
                             }
                         });
                     }
@@ -135,7 +126,7 @@ public class Storage extends AppCompatActivity {
     }
 
     public void sell(View view) {
-        SharedPreferences Product = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences Product = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         allProduct = Product.getInt("sumProd", 0);
 
         SharedPreferences Arfolyam = getSharedPreferences("Arfolyam", Context.MODE_PRIVATE);
@@ -230,7 +221,7 @@ public class Storage extends AppCompatActivity {
     public void SellProductSeekBar() {
         ProductsSeekBar = (SeekBar) findViewById(R.id.ProductsSeekBar);
         ProductSelected = (TextView) findViewById(R.id.ProductsSelected);
-        SharedPreferences Product = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences Product = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         allProd = Product.getInt("sumProd", 0);
         ProductsSeekBar.setMax(allProd);
         ProductSelected.setText("Products Selected: " + new DecimalFormat("###,###,###").format(ProductsSeekBar.getMax()));

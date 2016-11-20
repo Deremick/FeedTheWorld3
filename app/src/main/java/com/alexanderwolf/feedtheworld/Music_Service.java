@@ -15,16 +15,15 @@ public class Music_Service extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        song = MediaPlayer.create(Music_Service.this, R.raw.recording);
-        song.setLooping(true);
-        song.start();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
 
-
+        song = MediaPlayer.create(Music_Service.this, R.raw.recording);
+        song.setLooping(true);
+        song.start();
+        return START_STICKY;
     }
 
     @Override
@@ -41,4 +40,5 @@ public class Music_Service extends Service {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
 }

@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
     int storage;
 
-    boolean megallit = true;
     float Money;
     int pressed;
     int NotiPressed;
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     boolean isGoing;
 
     boolean firstStart;
-    private static TextView MoneyText;
+    private TextView MoneyText;
 
 
 
@@ -101,15 +100,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences pressedPref = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
         pressed = pressedPref.getInt("pressed", 1);
 
-        if (pressed % 2 == 0) {
-            Intent music = new Intent(MainActivity.this, Music_Service.class);
-            startService(music);
-        }
-        else {
-            Intent music = new Intent(MainActivity.this, Music_Service.class);
-            stopService(music);
-        }
-
 
         final Button Settings = (Button) findViewById(R.id.Settings_button);
 
@@ -147,8 +137,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         SharedPreferences pressedPref = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
                         pressed = pressedPref.getInt("pressed", 1);
+                        isGoing = pressedPref.getBoolean("isGoing", false);
 
-                        if (pressed % 2 != 0) {
+                        if (pressed % 2 != 0 && !isGoing) {
                             Intent music = new Intent(MainActivity.this, Music_Service.class);
                             startService(music);
                             pressed++;
@@ -208,22 +199,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        SharedPreferences numberofFriends = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberofFriends = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         numberOfFriends = numberofFriends.getInt("NOFriends", 0);
 
-        SharedPreferences numberOfRestaurants = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfRestaurants = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         numberOfRests = numberOfRestaurants.getInt("NORests", 0);
 
-        SharedPreferences numberOfFactories = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfFactories = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         numberOfFact = numberOfFactories.getInt("NOFacts", 0);
 
-        SharedPreferences numberOfMines = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfMines = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         numberOfMine = numberOfMines.getInt("NOMines", 0);
 
-        SharedPreferences numberOfEnrichments = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences numberOfEnrichments = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         numberOfEnrich = numberOfEnrichments.getInt("NOEnrichments", 0);
 
-        SharedPreferences sumPref = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+        SharedPreferences sumPref = getSharedPreferences("Producers", Context.MODE_PRIVATE);
         productSum = sumPref.getInt("sumProd", 0);
         productSum = sumPref.getInt("sumProd", 0);
         FriendProduct = sumPref.getInt("FriendProd", 0);
@@ -310,19 +301,19 @@ public class MainActivity extends AppCompatActivity {
                                     startEnrich.setClickable(true);
                                 }
 
-                                SharedPreferences numberofFriends = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+                                SharedPreferences numberofFriends = getSharedPreferences("Producers", Context.MODE_PRIVATE);
                                 numberOfFriends = numberofFriends.getInt("NOFriends", 0);
 
-                                SharedPreferences numberOfRestaurants = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+                                SharedPreferences numberOfRestaurants = getSharedPreferences("Producers", Context.MODE_PRIVATE);
                                 numberOfRests = numberOfRestaurants.getInt("NORests", 0);
 
-                                SharedPreferences numberOfFactories = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+                                SharedPreferences numberOfFactories = getSharedPreferences("Producers", Context.MODE_PRIVATE);
                                 numberOfFact = numberOfFactories.getInt("NOFacts", 0);
 
-                                SharedPreferences numberOfMines = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+                                SharedPreferences numberOfMines = getSharedPreferences("Producers", Context.MODE_PRIVATE);
                                 numberOfMine = numberOfMines.getInt("NOMines", 0);
 
-                                SharedPreferences numberOfEnrichments = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+                                SharedPreferences numberOfEnrichments = getSharedPreferences("Producers", Context.MODE_PRIVATE);
                                 numberOfEnrich = numberOfEnrichments.getInt("NOEnrichments", 0);
 
                                 SharedPreferences Timers = getSharedPreferences("Timers", Context.MODE_PRIVATE);
@@ -351,7 +342,7 @@ public class MainActivity extends AppCompatActivity {
                                 Money = money.getFloat("money", 0);
                                 MoneyText.setText(new DecimalFormat("###,###,###.##").format(Money) + " $$");
 
-                                SharedPreferences sumPref = getSharedPreferences("Producters", Context.MODE_PRIVATE);
+                                SharedPreferences sumPref = getSharedPreferences("Producers", Context.MODE_PRIVATE);
                                 productSum = sumPref.getInt("sumProd", 0);
                                 FriendProduct = sumPref.getInt("FriendProd", 0);
                                 RestProduct = sumPref.getInt("RestProd", 0);
@@ -365,7 +356,6 @@ public class MainActivity extends AppCompatActivity {
 
                                 SUM.setText(new DecimalFormat("###,###,###").format(storage) + " / " + new DecimalFormat("###,###,###").format(productSum + EnrichProduct + MineProduct + FactProduct + RestProduct + FriendProduct));
 
-                               // if (productSum + EnrichProduct + MineProduct + FactProduct + RestProduct + FriendProduct <= storage) {
 
                                     SharedPreferences.Editor sumEdit = sumPref.edit();
                                     sumEdit.putInt("sumProd", productSum + EnrichProduct + MineProduct + FactProduct + RestProduct + FriendProduct);
@@ -487,7 +477,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void Shop(View view) {
-        megallit = false;
         Intent shop = new Intent("com.alexanderwolf.Buy");
         shop.setClass(MainActivity.this, Buy.class);
         startActivity(shop);
@@ -505,24 +494,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (megallit) {
             Intent music = new Intent(this, Music_Service.class);
             stopService(music);
-            megallit = false;
-        }
+            SharedPreferences pressedPref = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
+            SharedPreferences.Editor goingEdit = pressedPref.edit();
+            goingEdit.putBoolean("isGoing", false);
+            goingEdit.commit();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (!megallit) {
+
             SharedPreferences pressedPref = getSharedPreferences("Pressed", Context.MODE_PRIVATE);
+            SharedPreferences.Editor goingEdit = pressedPref.edit();
             pressed = pressedPref.getInt("pressed", 1);
             isGoing = pressedPref.getBoolean("isGoing", false);
 
             if ((pressed % 2 == 0) && !isGoing) {
                 Intent music = new Intent(MainActivity.this, Music_Service.class);
                 startService(music);
+                goingEdit.putBoolean("isGoing", true);
+                goingEdit.commit();
             }
             else {
                 Intent music = new Intent(MainActivity.this, Music_Service.class);
@@ -530,9 +523,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-        megallit = true;
 
-    }
 
     public void StorageAct(View view) {
         Intent storageAct = new Intent("com.alexanderwolf.Storage");
